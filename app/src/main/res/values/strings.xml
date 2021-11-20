@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">HealthHawk</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="workout_name">Workout Name</string>
+    <string name="sets"># Of Sets</string>
+    <string name="minutes">Minutes</string>
+    <string name="seconds">Seconds</string>
+    <string name="cooldown_sets">Cooldown Between Sets</string>
+    <string name="cooldown_exercises">Cooldown Between Exercises</string>
+    <string name="input_exercises">Enter exercises (sseperate with comma, ie pushups,situps)</string>
+    <string name="recovery">Recovery Between Sets</string>
+    <string name="rest">"Rest Between Exercises "</string>
+    <string name="exercise_length">Length Per exercise</string>
 </resources>
