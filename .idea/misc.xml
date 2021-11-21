@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_add_workout.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_display_workout_info.xml" value="0.1721014492753623" />
         <entry key="app/src/main/res/layout/activity_intervals.xml" value="0.19525330408418604" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14447463768115942" />
         <entry key="app/src/main/res/layout/activity_work_outs.xml" value="0.14447463768115942" />

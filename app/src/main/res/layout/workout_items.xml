@@ -8,9 +8,9 @@
         android:id="@+id/button_workout_items"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/black"
-        android:text="hello">
+        android:text="hello"
+        android:clickable="true"
+        android:background="?attr/selectableItemBackground">
     </TextView>
 
 

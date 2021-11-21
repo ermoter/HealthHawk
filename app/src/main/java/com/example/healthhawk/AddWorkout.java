@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.util.Arrays;
 
 public class AddWorkout extends AppCompatActivity {
+    static final String RESULT_VALUE = "fields" ;
     // Key value for intent
     String currentField;
     // Prepare global variables for each field within the activity
@@ -28,10 +29,10 @@ public class AddWorkout extends AppCompatActivity {
     TextView restTime;
     TextView recovery;
     Button okButton;
-    // default variables for error handling regarding the text views
-    String defaultExerciseTime;
-    String defaultRestTime;
-    String defaultRecovery;
+    // Place holders for the values the user enters when selecting their intervals
+    String exerciseTimeValue = "";
+    String restTimeValue = "";
+    String recoveryValue = "";
 
 
 
@@ -48,10 +49,6 @@ public class AddWorkout extends AppCompatActivity {
         restTime = findViewById(R.id.rest);
         recovery = findViewById(R.id.recovery);
         okButton = findViewById(R.id.confirm_selections_addWorkouts);
-
-        defaultExerciseTime = exerciseTime.getText().toString();
-        defaultRestTime = restTime.getText().toString();
-        defaultRecovery = exerciseTime.getText().toString();
 
         // Set click listeners for each text view so that the intervals fragment is called
         exerciseTime.setOnClickListener(new View.OnClickListener() {
@@ -96,14 +93,17 @@ public class AddWorkout extends AppCompatActivity {
                         Intent data = result.getData();
                         String resultValue = data.getStringExtra(IntervalsFragment.RESULT_VALUE);
                         if (currentField == "rest") {
-                            String text = restTime.getText().toString();
+                            restTimeValue = resultValue;
+                            String text = restTime.getText().toString().split(":")[0];
                             restTime.setText(text + ": " + resultValue + " Minutes");
                         }
                         else if (currentField == "recovery")  {
-                            String text = recovery.getText().toString();
+                            recoveryValue = resultValue;
+                            String text = recovery.getText().toString().split(":")[0];
                             recovery.setText(text + ": " + resultValue + " Minutes");
                         }else {
-                            String text = exerciseTime.getText().toString();
+                            exerciseTimeValue = resultValue;
+                            String text = exerciseTime.getText().toString().split(":")[0];
                             exerciseTime.setText(text + ": " + resultValue + " Minutes");
                         }
                     }
@@ -123,14 +123,11 @@ public class AddWorkout extends AppCompatActivity {
         boolean flag = false;
 
         String[] fields = {workoutName.getText().toString(), numberOfSets.getText().toString(),
-                exercises.getText().toString(), exerciseTime.getText().toString(), restTime.getText().toString(), recovery.getText().toString()};
+                exercises.getText().toString(), exerciseTimeValue, restTimeValue, recoveryValue};
 
         if ( Arrays.asList(fields).contains("") ) {
             flag = true;
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-        }else if (defaultExerciseTime == fields[3] || defaultRestTime == fields[4] || defaultRecovery == fields[5]) {
-            flag = true;
-            Toast.makeText(this, "Please enter your intervals by clicking the respective texts", Toast.LENGTH_SHORT).show();
         }
 
         return flag;
@@ -138,7 +135,11 @@ public class AddWorkout extends AppCompatActivity {
 
     private void sendData() {
         String[] fields = {workoutName.getText().toString(), numberOfSets.getText().toString(),
-                exercises.getText().toString(), exerciseTime.getText().toString(), restTime.getText().toString(), recovery.getText().toString()};
+                exercises.getText().toString(), exerciseTimeValue, restTimeValue, recoveryValue};
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(RESULT_VALUE, fields);
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
     }
 
 }

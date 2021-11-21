@@ -9,7 +9,9 @@
     <string name="cooldown_sets">Cooldown Between Sets</string>
     <string name="cooldown_exercises">Cooldown Between Exercises</string>
     <string name="input_exercises">Enter exercises (sseperate with comma, ie pushups,situps)</string>
-    <string name="recovery">Recovery Between Sets</string>
-    <string name="rest">"Rest Between Exercises "</string>
-    <string name="exercise_length">Length Per exercise</string>
+    <string name="recovery">Recovery Between Sets:</string>
+    <string name="rest">"Rest Between Exercises:"</string>
+    <string name="exercise_length">Length Per exercise:</string>
+    <string name="workout_info">Workout Information</string>
+    <string name="add_your_workout_title">Fill In The Following Fields</string>
 </resources>
