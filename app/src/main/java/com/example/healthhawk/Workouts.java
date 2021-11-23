@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -78,10 +79,10 @@ public class Workouts extends AppCompatActivity {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
-                        Toast.makeText(Workouts.this, "worked", Toast.LENGTH_SHORT).show();
                         Intent data = result.getData();
                         String[] fields = data.getStringArrayExtra(AddWorkout.RESULT_VALUE);
-
+                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.workouts_constraint_layout), fields[0] + " Workout Has Been Added Successfully", Snackbar.LENGTH_SHORT);
+                        mySnackbar.show();
                         // Update view and database
                         insertToDatabase(fields, dbWrite);
                         updateView(fields);

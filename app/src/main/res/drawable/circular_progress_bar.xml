@@ -12,7 +12,7 @@
     <item>
         <shape
             android:shape="ring"
-            android:thicknessRatio="24"
+            android:thicknessRatio="20"
             android:useLevel="true">
             <solid android:color="@color/purple_200"/>
         </shape>

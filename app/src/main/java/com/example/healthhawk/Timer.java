@@ -6,12 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
-import android.view.SoundEffectConstants;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.Locale;
 
@@ -19,7 +16,9 @@ public class Timer extends AppCompatActivity {
     Intent intent;
     String[] fields;
     CountDownTimer timer;
-    TextView tv;
+    TextView timerTextView;
+    TextView title;
+    TextView header;
     TextToSpeech t1;
 
     String workoutName;
@@ -48,6 +47,8 @@ public class Timer extends AppCompatActivity {
         setContentView(R.layout.activity_timer);
 
         progressBar = findViewById(R.id.timer_progress_bar);
+        title = findViewById(R.id.timer_workout_title);
+        header = findViewById(R.id.timer_currentWorkout_tv);
 
         intent = getIntent();
         fields = intent.getStringArrayExtra("timer");
@@ -66,7 +67,7 @@ public class Timer extends AppCompatActivity {
         intervals = (restFlag) ? exercises.length + (exercises.length-1) : exercises.length;
         setsRemaining = numberOfSets-1;
 
-        tv = findViewById(R.id.tv_timer);
+        timerTextView = findViewById(R.id.tv_timer);
 
         t1=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -77,6 +78,7 @@ public class Timer extends AppCompatActivity {
             }
         });
 
+        title.setText(workoutName);
         initWorkout();
 
     }
@@ -127,21 +129,42 @@ public class Timer extends AppCompatActivity {
             minutes = 0;
         }
 
-        tv.setText(minutes + " : " + String.format("%02d", seconds));
+        timerTextView.setText(minutes + " : " + String.format("%02d", seconds));
     }
 
     private void initRest() {
         progressBarCounter = 0;
         setActivityBackgroundColorBlue();
         t1.speak("Rest", TextToSpeech.QUEUE_FLUSH, null, null);
+        header.setText("Rest");
         startTimer(restBetweenExercises);
 
     }
 
+    private void initRecovery() {
+        setsRemaining --;
+        exerciseIndex = 0;
+        // If there is no recovery interval, reset everything and go strait to the first exercise
+        if (!recoveryFlag) {
+            intervalsCompleted = 0;
+            initWorkout();
+        }// else, start a timer for the recovery length specified by the user
+        else {
+            progressBarCounter = 0;
+            setActivityBackgroundColorGreen();
+            t1.speak("Recovery", TextToSpeech.QUEUE_FLUSH, null, null);
+            header.setText("Recovery");
+
+            intervalsCompleted = -1;
+            startTimer(recoveryBetweenSets);
+        }
+    }
+
     private void initWorkout() {
         progressBarCounter = 0;
-        setActivityBackgroundColorRed();
+        setActivityBackgroundColorOrange();
         t1.speak(exercises[exerciseIndex], TextToSpeech.QUEUE_FLUSH, null, null);
+        header.setText(exercises[exerciseIndex]);
         exerciseIndex ++;
         startTimer(timePerExercise);
     }
@@ -166,26 +189,16 @@ public class Timer extends AppCompatActivity {
                 if (intervalsCompleted < intervals){
                     if (restFlag && intervalsCompleted % 2 == 0) {
                         initWorkout();
-
                     }else {
                         initRest();
                     }
                 }else {
                     if (setsRemaining > 0) {
                         setActivityBackgroundColorOrange();
-                        tv.setText("Starting new set...");
-                        try
-                        {
-                            Thread.sleep(3000);
-                        }
-                        catch(InterruptedException ex)
-                        {
-                            Thread.currentThread().interrupt();
-                        }
-                        startSet();
+                        initRecovery();
 
                     }else {
-                        tv.setText("Done");
+                        timerTextView.setText("Done");
                     }
 
                 }
@@ -193,24 +206,20 @@ public class Timer extends AppCompatActivity {
         }.start();
     }
 
-    private void startSet() {
-        setsRemaining --;
-        intervalsCompleted = 0;
-        exerciseIndex = 0;
-        initWorkout();
-    }
-
     public void setActivityBackgroundColorBlue() {
         View view = this.getWindow().getDecorView();
-        view.setBackgroundColor(getResources().getColor(android.R.color.black));
+        view.setBackgroundResource(R.drawable.blue);
     }
-    public void setActivityBackgroundColorRed() {
+
+    public void setActivityBackgroundColorGreen() {
         View view = this.getWindow().getDecorView();
-        view.setBackgroundColor(getResources().getColor(android.R.color.darker_gray));
+        view.setBackgroundResource(R.drawable.green);
     }
+
     public void setActivityBackgroundColorOrange() {
         View view = this.getWindow().getDecorView();
-        view.setBackgroundColor(getResources().getColor(android.R.color.holo_orange_dark));
+        view.setBackgroundResource(R.drawable.orange_);
+
     }
 
 

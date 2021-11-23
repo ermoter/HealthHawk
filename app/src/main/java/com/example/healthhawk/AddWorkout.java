@@ -135,9 +135,15 @@ public class AddWorkout extends AppCompatActivity {
         if ( Arrays.asList(fields).contains("") ) {
             flag = true;
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-        }else if(inDatabase(fields[0]) == true) {
+        }else if (inDatabase(fields[0]) == true) {
             flag = true;
             Toast.makeText(this, "Workout with name already exists, please select another name.", Toast.LENGTH_SHORT).show();
+        }else if (isZero(fields[1])) { // check is the number of sets is greater than 0
+            flag = true;
+            Toast.makeText(this, "Please ensure that more than 0 sets are selected", Toast.LENGTH_SHORT).show();
+        }else if (exerciseTimeValue.equals("0:00")) {
+            flag = true;
+            Toast.makeText(this, "Please ensure that the length of each exercise is greater than zero", Toast.LENGTH_SHORT).show();
         }
 
         return flag;
@@ -157,6 +163,14 @@ public class AddWorkout extends AppCompatActivity {
         if ( Arrays.asList(workoutNames).contains(name) ) {
             flag = true;
         }
+        return flag;
+    }
+
+    // Helper function which checks if a string value is equivalent to zero
+    private boolean isZero(String value) {
+        boolean flag = false;
+        int val = Integer.parseInt(value);
+        if (val == 0) flag = true;
         return flag;
     }
 

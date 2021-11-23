@@ -2,17 +2,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:soundEffectsEnabled="true">
+    android:soundEffectsEnabled="true"
+    android:id="@+id/timer_layout"
+    >
+
+    <TextView
+        android:id="@+id/timer_workout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/timer_progress_bar"
+        android:layout_marginBottom="104dp"
+        android:gravity="center"
+        android:text="hey"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
+        android:textStyle="bold">
+    </TextView>
+
+    <TextView
+        android:id="@+id/timer_currentWorkout_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/timer_progress_bar"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:text="hey"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+        android:textStyle="bold"></TextView>
 
     <ProgressBar
         android:id="@+id/timer_progress_bar"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:indeterminateOnly="false"
         android:progressDrawable="@drawable/circular_progress_bar" />
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,6 +44,13 @@
         android:id="@+id/tv_timer"
         android:layout_centerInParent="true"
         android:text="hello"
+        android:textColor="@color/black"
+        android:textSize="40dp"
         android:soundEffectsEnabled="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
 </RelativeLayout>
