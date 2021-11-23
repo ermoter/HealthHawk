@@ -6,10 +6,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "Workouts.db";
+    public static final String DATABASE_NAME = "HealthHawk.db";
+    // Variables for Workouts table
     public static final int VERSION_NUM = 2;
     public static final String TABLE_NAME = "Workouts";
-    public static final String KEY_WORKOUT_ID = "ID";
     public static final String KEY_WORKOUT_NAME = "WorkoutName";
     public static final String KEY_SETS = "Sets";
     public static final String KEY_EXERCISE_TIME = "Time_Per_Exercise";
@@ -28,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Note that column names/table names must not have any spaces
         String new_table =
                 "CREATE TABLE " + TABLE_NAME + " (" +
-                        KEY_WORKOUT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_WORKOUT_NAME + " TEXT, " +
+                        KEY_WORKOUT_NAME + " String PRIMARY KEY," + " TEXT, " +
                         KEY_SETS + " INTEGER," + KEY_EXERCISES + " TEXT, " + KEY_EXERCISE_TIME + " DECIMAL, " +
                         KEY_REST_TIME + " DECIMAL, " + KEY_RECOVERY_TIME + " DECIMAL)";
 

@@ -19,20 +19,18 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 public class Workouts extends AppCompatActivity {
     private static final String ACTIVITY_NAME = "Main" ;
     FloatingActionButton button;
-    ArrayList<String[]> workoutNamesList;
+    ArrayList<String[]> workoutInformationList;
     RecyclerView recyclerView;
+    WorkoutsAdapter adapter;
 
     // Initialize a database variable to read and write to
     DatabaseHelper db = new DatabaseHelper(this);
@@ -46,14 +44,15 @@ public class Workouts extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workouts);
 
-        workoutNamesList = new ArrayList<String[]>();
+        workoutInformationList = new ArrayList<String[]>();
         button = findViewById(R.id.add_workout_button);
 
         // initialize readable database and cursor.
-        // then add any prior workouts already in the database, to
+        // then add any prior workouts already in the database to the list
         dbRead = db.getReadableDatabase();
         cursor = initCursor(dbRead);
-        addDatabaseItems(cursor);
+        PopulateView populateView = new PopulateView();
+        populateView.execute();
 
         // initialize writable database and cursor.
         dbWrite = db.getWritableDatabase();
@@ -61,24 +60,8 @@ public class Workouts extends AppCompatActivity {
         // set adapter
         recyclerView = findViewById(R.id.recyclerView_workouts);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        WorkoutsAdapter adapter = new WorkoutsAdapter(this, workoutNamesList);
+        adapter = new WorkoutsAdapter(this, workoutInformationList, this);
         recyclerView.setAdapter(adapter);
-
-        // implement swipe to delete feature
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                Log.i("main", "The position is" + viewHolder.getAdapterPosition());
-                workoutNamesList.remove(viewHolder.getAdapterPosition());
-                adapter.notifyDataSetChanged();
-            }
-        }).attachToRecyclerView(recyclerView);
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +89,7 @@ public class Workouts extends AppCompatActivity {
                 }
             });
 
+    // Get a projection of the workouts database to work with
     public Cursor initCursor(SQLiteDatabase db) {
         return db.query(
                 DatabaseHelper.TABLE_NAME,
@@ -117,35 +101,7 @@ public class Workouts extends AppCompatActivity {
                 null);
     }
 
-    protected  void addDatabaseItems(Cursor cursor) {
-        String nameCol = DatabaseHelper.KEY_WORKOUT_NAME;
-        String setsCol = DatabaseHelper.KEY_SETS;
-        String exercisesCol = DatabaseHelper.KEY_EXERCISES;
-        String exerciseTimeCol = DatabaseHelper.KEY_EXERCISE_TIME;
-        String restCol = DatabaseHelper.KEY_REST_TIME;
-        String recoveryCol = DatabaseHelper.KEY_RECOVERY_TIME;
-        // Loop through each element in cursor, and retreive the message
-        // Also log the message
-        while(cursor.moveToNext()) {
-            String id = cursor.getString(cursor.getColumnIndexOrThrow(nameCol));
-            String sets = cursor.getString(cursor.getColumnIndexOrThrow(setsCol));
-            String exerciseTime = cursor.getString(cursor.getColumnIndexOrThrow(exerciseTimeCol));
-            String coolDownSets = cursor.getString(cursor.getColumnIndexOrThrow(restCol));
-            String coolDownExercises = cursor.getString(cursor.getColumnIndexOrThrow(recoveryCol));
-            String exercises = cursor.getString(cursor.getColumnIndexOrThrow(exercisesCol));
-            String[] record =  {id, sets, exerciseTime, coolDownSets, coolDownExercises, exercises};
-            workoutNamesList.add(record);
-            //Log.i(ACTIVITY_NAME, "SQL MESSAGE:" + cursor.getString(
-            //cursor.getColumnIndexOrThrow( ChatDatabaseHelper.KEY_MESSAGE)));
-        }
-
-        // Log the amount of columns in the database, and then print out what they are
-        // Log.i(ACTIVITY_NAME,"Cursor’s  column count =" + cursor.getColumnCount() );
-        // for (int i = 0; i < cursor.getColumnCount(); i++) {Log.i(ACTIVITY_NAME,cursor.getColumnName(i));}
-        cursor.close();
-
-    }
-
+    // Insert user input into database
     public void insertToDatabase(String[] fields, SQLiteDatabase db) {
         // Get appropriate fields from fields array
         String workoutName = fields[0];
@@ -167,27 +123,49 @@ public class Workouts extends AppCompatActivity {
 
     }
 
+    // helper function to delete item from recyclerview and database
+    public void deleteDatabaseEntry(String name, int position) {
+        String selection = DatabaseHelper.KEY_WORKOUT_NAME + " = ?";
+        String[] selectionArgs = { "" + name };
+
+        // delete record in database containing selected workout name
+        int deletedRows = dbRead.delete(DatabaseHelper.TABLE_NAME, selection, selectionArgs );
+
+        // delete item from recycler view
+        workoutInformationList.remove(position);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    // Opens activity which allows user to add their workout information
     public void openAddWorkout() {
         Intent intent = new Intent(this, AddWorkout.class);
+        String[] workoutNames = getNames();
+        intent.putExtra("Workout Names", workoutNames);
         launchSomeActivity.launch(intent);
     }
 
-    // consider making a class for the fields to help ie like the yt video did with usernames
+    // Helper function which generates all the names for each workout in database
+    private String[] getNames() {
+        String[] workoutNames = new String[workoutInformationList.size()];
+        for(int i = 0; i < workoutInformationList.size(); i++) {
+            workoutNames[i] = workoutInformationList.get(i)[0];
+        }
+        return workoutNames;
+    }
+
+    // Update recycler view
     public void updateView(String[] fields) {
         // Add fields to lists
-        workoutNamesList.add(fields);
+        workoutInformationList.add(fields);
         // log count
-        Log.i(ACTIVITY_NAME, "count is; " + workoutNamesList.size());
+        Log.i(ACTIVITY_NAME, "count is; " + workoutInformationList.size());
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView_workouts);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        WorkoutsAdapter adapter = new WorkoutsAdapter(this, workoutNamesList);
+        WorkoutsAdapter adapter = new WorkoutsAdapter(this, workoutInformationList, this);
         recyclerView.setAdapter(adapter);
-
-
     }
-
-
 
     public void onDestroy() {
         super.onDestroy();
@@ -195,10 +173,31 @@ public class Workouts extends AppCompatActivity {
         Log.i(ACTIVITY_NAME, "In onDestroy()");
     }
 
+    // Private async class which populates the recycler view with data stored in database
     private class PopulateView extends AsyncTask<String, Integer, String> {
 
         @Override
-        protected String doInBackground(String... strings) {
+        protected String doInBackground(String... Strings) {
+            String nameCol = DatabaseHelper.KEY_WORKOUT_NAME;
+            String setsCol = DatabaseHelper.KEY_SETS;
+            String exercisesCol = DatabaseHelper.KEY_EXERCISES;
+            String exerciseTimeCol = DatabaseHelper.KEY_EXERCISE_TIME;
+            String restCol = DatabaseHelper.KEY_REST_TIME;
+            String recoveryCol = DatabaseHelper.KEY_RECOVERY_TIME;
+            // Loop through each element in cursor, and add to list
+            while(cursor.moveToNext()) {
+                String id = cursor.getString(cursor.getColumnIndexOrThrow(nameCol));
+                String sets = cursor.getString(cursor.getColumnIndexOrThrow(setsCol));
+                String exercises = cursor.getString(cursor.getColumnIndexOrThrow(exercisesCol));
+                String exerciseTime = cursor.getString(cursor.getColumnIndexOrThrow(exerciseTimeCol));
+                String rest = cursor.getString(cursor.getColumnIndexOrThrow(restCol));
+                String recovery = cursor.getString(cursor.getColumnIndexOrThrow(recoveryCol));
+
+                String[] record =  {id, sets, exercises, exerciseTime, rest, recovery};
+                workoutInformationList.add(record);
+
+            }
+            cursor.close();
 
             return null;
         }

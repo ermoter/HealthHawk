@@ -20,9 +20,10 @@ public class DisplayWorkoutInfo extends AppCompatActivity {
     TextView workoutName;
     TextView numberOfSets;
     TextView timePerExercise;
-    TextView coolDownSets;
-    TextView coolDownExercise;
+    TextView restTime;
+    TextView recoveryTime;
     TextView exercises;
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +32,14 @@ public class DisplayWorkoutInfo extends AppCompatActivity {
 
         intent = getIntent();
         fields = intent.getStringArrayExtra("xd1");
+        position = intent.getIntExtra("position", 0);
+
 
         workoutName = findViewById(R.id.textView_workoutname);
         numberOfSets = findViewById(R.id.textView_sets);
         timePerExercise = findViewById(R.id.textView_exerciseTime);
-        coolDownSets = findViewById(R.id.textView_coolDownSets);
-        coolDownExercise = findViewById(R.id.textView_coolDown_exercise);
+        restTime = findViewById(R.id.textView_coolDownSets);
+        recoveryTime = findViewById(R.id.textView_coolDown_exercise);
         exercises = findViewById(R.id.textView_exercises);
         populateFields(fields);
 
@@ -46,7 +49,7 @@ public class DisplayWorkoutInfo extends AppCompatActivity {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+
             } // add start workout and edit button
         });
 
@@ -55,26 +58,33 @@ public class DisplayWorkoutInfo extends AppCompatActivity {
             public void onClick(View view) {
                 // Open timer activity
                 openTimer(fields);
-
             }
         });
 
     }
 
     /** Populates all textviews according to information given by the user **/
-    public void populateFields(String[] fields) {
-        TextView[] textViews = {workoutName, numberOfSets, timePerExercise, coolDownSets, coolDownExercise, exercises};
-        String[] captions = {"Workout Name: ", "Number Of Sets: ", "Time Per Exercise (minutes): ", "Cooldown Between Sets (minutes): ",
-                "Cooldown Between Exercises (minutes): ", "List Of Exercises: "};
+    private void populateFields(String[] fields) {
+        TextView[] textViews = {workoutName, numberOfSets, exercises, timePerExercise, restTime, recoveryTime};
+        String[] captions = {"Workout Name: ", "Number Of Sets: ","List Of Exercises: ", "Time Per Exercise: ", "Rest Between Exercises: ",
+                "Recovery Between Sets: "};
         for (int i = 0; i < fields.length; i ++) {
-            textViews[i].setText(captions[i] + fields[i]);
+            if (textViews[i] == timePerExercise || textViews[i] == restTime || textViews[i] == recoveryTime ) {
+                textViews[i].setText(captions[i] + fields[i] + " Minutes");
+            }else {
+                textViews[i].setText(captions[i] + fields[i]);
+            }
         }
         return;
     }
 
-    public void openTimer(String[] fields) {
-        //Intent intent = new Intent(this, Timer.class);
+    private void openTimer(String[] fields) {
+        Intent intent = new Intent(this, Timer.class);
         intent.putExtra("timer", fields);
         startActivity(intent);
+    }
+
+    private void delete(int position, String name) {
+
     }
 }

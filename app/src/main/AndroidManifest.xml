@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthHawk">
         <activity
+            android:name=".Timer"
+            android:exported="true" />
+        <activity
             android:name=".DisplayWorkoutInfo"
             android:exported="true"
             android:label="@string/workout_info"
-            android:theme="@style/Theme.AppCompat.Dialog.Alert"/>
+            android:theme="@style/Theme.AppCompat.Dialog.Alert" />
         <activity
             android:name=".Intervals"
             android:exported="true" />
@@ -21,7 +24,7 @@
             android:name=".AddWorkout"
             android:exported="true"
             android:label="@string/add_your_workout_title"
-            android:theme="@style/Theme.AppCompat.Dialog.Alert"/>
+            android:theme="@style/Theme.AppCompat.Dialog.Alert" />
         <activity
             android:name=".Workouts"
             android:exported="true" />

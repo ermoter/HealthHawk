@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AddWorkout extends AppCompatActivity {
@@ -33,6 +34,8 @@ public class AddWorkout extends AppCompatActivity {
     String exerciseTimeValue = "";
     String restTimeValue = "";
     String recoveryValue = "";
+    // list which populates recycler view for Workouts activity
+    String[] workoutNames;
 
 
 
@@ -40,6 +43,10 @@ public class AddWorkout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_workout);
+
+        // Receive workouts list from intent
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) workoutNames = bundle.getStringArray("Workout Names");
 
         // Find each view by their ID
         workoutName = findViewById(R.id.workout_name);
@@ -128,6 +135,9 @@ public class AddWorkout extends AppCompatActivity {
         if ( Arrays.asList(fields).contains("") ) {
             flag = true;
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+        }else if(inDatabase(fields[0]) == true) {
+            flag = true;
+            Toast.makeText(this, "Workout with name already exists, please select another name.", Toast.LENGTH_SHORT).show();
         }
 
         return flag;
@@ -141,5 +151,14 @@ public class AddWorkout extends AppCompatActivity {
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
     }
+
+    private boolean inDatabase(String name) {
+        boolean flag = false;
+        if ( Arrays.asList(workoutNames).contains(name) ) {
+            flag = true;
+        }
+        return flag;
+    }
+
 
 }
