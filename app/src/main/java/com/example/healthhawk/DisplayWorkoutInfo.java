@@ -48,9 +48,7 @@ public class DisplayWorkoutInfo extends AppCompatActivity {
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
-            } // add start workout and edit button
+            public void onClick(View view) { finish();} // add start workout and edit button
         });
 
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -82,9 +80,5 @@ public class DisplayWorkoutInfo extends AppCompatActivity {
         Intent intent = new Intent(this, Timer.class);
         intent.putExtra("timer", fields);
         startActivity(intent);
-    }
-
-    private void delete(int position, String name) {
-
     }
 }

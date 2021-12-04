@@ -3,10 +3,12 @@ package com.example.healthhawk;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,6 +22,11 @@ public class Timer extends AppCompatActivity {
     TextView title;
     TextView header;
     TextToSpeech t1;
+    ImageButton playPause;
+    ImageButton ff;
+    ImageButton rewind;
+    TextView exerciseNumberTV;
+    TextView setNumberTV;
 
     String workoutName;
     int numberOfSets;
@@ -32,11 +39,15 @@ public class Timer extends AppCompatActivity {
     int intervalsCompleted = 0;
     int intervals;
     int setsRemaining;
+    long timeRemaining;
     boolean recoveryFlag;
     boolean restFlag;
+    boolean pauseFlag = false;
 
     int progressBarCounter = 0;
     ProgressBar progressBar;
+
+    MediaPlayer mp;
 
 
 
@@ -46,9 +57,16 @@ public class Timer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer);
 
+         mp = MediaPlayer.create(this, R.raw.timer_tick);
+
         progressBar = findViewById(R.id.timer_progress_bar);
         title = findViewById(R.id.timer_workout_title);
         header = findViewById(R.id.timer_currentWorkout_tv);
+        playPause = findViewById(R.id.imageButton);
+        ff = findViewById(R.id.imageButton2);
+        rewind = findViewById(R.id.imageButton3);
+        exerciseNumberTV = findViewById(R.id.exercise_number_tv);
+        setNumberTV = findViewById(R.id.set_number_tv);
 
         intent = getIntent();
         fields = intent.getStringArrayExtra("timer");
@@ -78,7 +96,31 @@ public class Timer extends AppCompatActivity {
             }
         });
 
+        // Set on click listeners for the image buttons
+        playPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pauseTimer();
+            }
+        });
+
+        ff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fastForward();
+            }
+        });
+
+        rewind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rewind();
+            }
+        });
+
         title.setText(workoutName);
+        //intervalsCompleted = -1;
+        //startTimer(1000);
         initWorkout();
 
     }
@@ -129,12 +171,12 @@ public class Timer extends AppCompatActivity {
             minutes = 0;
         }
 
-        timerTextView.setText(minutes + " : " + String.format("%02d", seconds));
+        timerTextView.setText(minutes + ":" + String.format("%02d", seconds));
     }
 
     private void initRest() {
         progressBarCounter = 0;
-        setActivityBackgroundColorBlue();
+        setTextColorBlue();
         t1.speak("Rest", TextToSpeech.QUEUE_FLUSH, null, null);
         header.setText("Rest");
         startTimer(restBetweenExercises);
@@ -151,7 +193,7 @@ public class Timer extends AppCompatActivity {
         }// else, start a timer for the recovery length specified by the user
         else {
             progressBarCounter = 0;
-            setActivityBackgroundColorGreen();
+            setTextColourGreen();
             t1.speak("Recovery", TextToSpeech.QUEUE_FLUSH, null, null);
             header.setText("Recovery");
 
@@ -161,8 +203,10 @@ public class Timer extends AppCompatActivity {
     }
 
     private void initWorkout() {
+        exerciseNumberTV.setText("Exercise " + (exerciseIndex+1) + "/" +  exercises.length);
+        setNumberTV.setText("Set " + (numberOfSets-setsRemaining) + "/" +  numberOfSets);
         progressBarCounter = 0;
-        setActivityBackgroundColorOrange();
+        setTextColorRed();
         t1.speak(exercises[exerciseIndex], TextToSpeech.QUEUE_FLUSH, null, null);
         header.setText(exercises[exerciseIndex]);
         exerciseIndex ++;
@@ -170,16 +214,17 @@ public class Timer extends AppCompatActivity {
     }
 
     private void startTimer(long seconds) {
-        //final MediaPlayer mp = MediaPlayer.create(this, );
+
         timer = new CountDownTimer(seconds, 1000) {
             int counter = (int)(seconds / 1000);
             @Override
             public void onTick(long millisUntilFinished) {
+                if (millisUntilFinished <= 5000) mp.start(); // play tick
+                timeRemaining = millisUntilFinished;
                 counter--;
-                //tv.playSoundEffect(SoundEffectConstants.CLICK);
                 decrementTime(counter);
                 progressBarCounter++;
-                progressBar.setProgress((int)progressBarCounter*100/(5000/1000));
+                progressBar.setProgress((int)progressBarCounter*100/((int)seconds/1000));
             }
 
             @Override
@@ -194,7 +239,7 @@ public class Timer extends AppCompatActivity {
                     }
                 }else {
                     if (setsRemaining > 0) {
-                        setActivityBackgroundColorOrange();
+                        setTextColorRed();
                         initRecovery();
 
                     }else {
@@ -206,24 +251,124 @@ public class Timer extends AppCompatActivity {
         }.start();
     }
 
-    public void setActivityBackgroundColorBlue() {
-        View view = this.getWindow().getDecorView();
-        view.setBackgroundResource(R.drawable.blue);
+    private int timerViewToInt(TextView timerView) {
+        int minutes = Integer.parseInt(timerView.getText().toString().split(":")[0]);
+        int seconds = Integer.parseInt(timerView.getText().toString().split(":")[1]);
+        return minutes*60 + seconds;
     }
 
-    public void setActivityBackgroundColorGreen() {
-        View view = this.getWindow().getDecorView();
-        view.setBackgroundResource(R.drawable.green);
+    private void pauseTimer() {
+        if (pauseFlag) {
+            progressBarCounter = 0;
+            playPause.setImageResource(android.R.drawable.ic_media_play);
+            int time = timerViewToInt(timerTextView);
+
+            startTimer((long) time * 1000);
+            pauseFlag = false;
+        }else { // Timer is live, pause the timer
+            timer.cancel();
+            playPause.setImageResource(android.R.drawable.ic_media_pause);
+            pauseFlag = true;
+        }
+
     }
 
-    public void setActivityBackgroundColorOrange() {
-        View view = this.getWindow().getDecorView();
-        view.setBackgroundResource(R.drawable.orange_);
+    private void fastForward() {
+        if (pauseFlag == true) {
+            playPause.setImageResource(android.R.drawable.ic_media_play);
+            pauseFlag = false;
+        }
+        timer.cancel();
+        intervalsCompleted ++;
+        progressBar.setProgress(100);
+        if (intervalsCompleted < intervals){
+            if (restFlag && intervalsCompleted % 2 == 0) {
+                initWorkout();
+            }else {
+                initRest();
+            }
+        }else {
+            if (setsRemaining > 0) {
+                setTextColorRed();
+                initRecovery();
+
+            }else {
+                timerTextView.setText("Done");
+            }
+        }
+    }
+
+    private void rewind() {
+        if (pauseFlag == true) { // if button is clicked when workout is paused, make sure to set the on pause flag to false
+            playPause.setImageResource(android.R.drawable.ic_media_play);
+            pauseFlag = false;
+        }
+        if (setsRemaining != numberOfSets - 1 || intervalsCompleted != 0) {
+            timer.cancel();
+            intervalsCompleted--;
+            exerciseIndex --;
+            progressBar.setProgress(100);
+
+            if (intervalsCompleted < intervals) { // Regular case where you're in the middle of a set
+                if (restFlag && intervalsCompleted % 2 == 0) {
+                    if (intervalsCompleted == -2) { // Rewind was called while timer was in recovery interval
+                        intervalsCompleted = intervals - 1; // adjust intervals completed and index to last exercise in the cycle
+                        exerciseIndex = exercises.length-1;
+                        setsRemaining ++;
+                    }
+                    initWorkout();
+                } else {
+                    if (intervalsCompleted == -1) {  // Case where you've just started a new set
+                        setsRemaining++;
+                        if (recoveryFlag) initRecovery();
+                        else { // if there is no recovery, then go to the last workout of the previous set
+                            intervalsCompleted = intervals - 1;
+                            exerciseIndex = exercises.length-1;
+                            initWorkout();
+                        }
+                    }else initRest();
+                }
+            } else {
+                if (setsRemaining > 0) {
+                    setTextColorRed();
+                    initRecovery();
+
+                } else {
+                    timerTextView.setText("Done");
+                }
+            }
+        }
 
     }
 
+    public void setTextColorBlue() {
+        timerTextView.setTextColor(getColor(R.color.blue));
+        title.setTextColor(getColor(R.color.blue));
+        header.setTextColor(getColor(R.color.blue));
+        setNumberTV.setTextColor(getColor(R.color.blue));
+        exerciseNumberTV.setTextColor(getColor(R.color.blue));
 
-    public void onDestroy() {
+    }
+
+    public void setTextColourGreen() {
+        timerTextView.setTextColor(getColor(R.color.green));
+        title.setTextColor(getColor(R.color.green));
+        header.setTextColor(getColor(R.color.green));
+        setNumberTV.setTextColor(getColor(R.color.green));
+        exerciseNumberTV.setTextColor(getColor(R.color.green));
+    }
+
+    public void setTextColorRed() {
+        timerTextView.setTextColor(getColor(R.color.red));
+        title.setTextColor(getColor(R.color.red));
+        header.setTextColor(getColor(R.color.red));
+        setNumberTV.setTextColor(getColor(R.color.red));
+        exerciseNumberTV.setTextColor(getColor(R.color.red));
+
+    }
+
+    @Override
+    protected void onDestroy() {
         if(timer!=null)
             timer.cancel();
         super.onDestroy();
