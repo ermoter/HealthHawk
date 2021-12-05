@@ -4,9 +4,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,11 +17,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Workouts extends AppCompatActivity {
@@ -32,6 +30,7 @@ public class Workouts extends AppCompatActivity {
     ArrayList<String[]> workoutInformationList;
     RecyclerView recyclerView;
     WorkoutsAdapter adapter;
+    AppDatabase appDatabase = new AppDatabase(this);
 
     // Initialize a database variable to read and write to
     DatabaseHelper db = new DatabaseHelper(this);
@@ -50,6 +49,11 @@ public class Workouts extends AppCompatActivity {
 
         // initialize readable database and cursor.
         // then add any prior workouts already in the database to the list
+        try {
+            appDatabase.open();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         dbRead = db.getReadableDatabase();
         cursor = initCursor(dbRead);
         PopulateView populateView = new PopulateView();
@@ -73,7 +77,7 @@ public class Workouts extends AppCompatActivity {
         });
     }
     // Create launcher variable inside onAttach or onCreate or global
-    ActivityResultLauncher<Intent> launchSomeActivity = registerForActivityResult(
+    ActivityResultLauncher<Intent> launchAddWorkout = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -84,7 +88,7 @@ public class Workouts extends AppCompatActivity {
                         Snackbar mySnackbar = Snackbar.make(findViewById(R.id.workouts_constraint_layout), fields[0] + " Workout Has Been Added Successfully", Snackbar.LENGTH_SHORT);
                         mySnackbar.show();
                         // Update view and database
-                        insertToDatabase(fields, dbWrite);
+                        insertToDatabase(fields);
                         updateView(fields);
                     }
                 }
@@ -93,7 +97,7 @@ public class Workouts extends AppCompatActivity {
     // Get a projection of the workouts database to work with
     public Cursor initCursor(SQLiteDatabase db) {
         return db.query(
-                DatabaseHelper.TABLE_NAME,
+                DatabaseHelper.WORKOUTS_TABLE_NAME,
                 null,
                 null,
                 null,
@@ -103,39 +107,18 @@ public class Workouts extends AppCompatActivity {
     }
 
     // Insert user input into database
-    public void insertToDatabase(String[] fields, SQLiteDatabase db) {
-        // Get appropriate fields from fields array
-        String workoutName = fields[0];
-        String sets = fields[1];
-        String exercises = fields[2];
-        String exerciseTime = fields[3];
-        String restTime = fields[4];
-        String recoveryTime = fields[5];
-
-        // Add these values to the database
-        values = new ContentValues();
-        values.put(DatabaseHelper.KEY_WORKOUT_NAME, workoutName);
-        values.put(DatabaseHelper.KEY_SETS, sets);
-        values.put(DatabaseHelper.KEY_EXERCISES, exercises);
-        values.put(DatabaseHelper.KEY_EXERCISE_TIME, exerciseTime);
-        values.put(DatabaseHelper.KEY_REST_TIME, restTime);
-        values.put(DatabaseHelper.KEY_RECOVERY_TIME, recoveryTime);
-        long newRowId = db.insert(DatabaseHelper.TABLE_NAME, null, values);
-
+    public void insertToDatabase(String[] fields) {
+        appDatabase.addWorkout(fields);
     }
 
     // helper function to delete item from recyclerview and database
     public void deleteDatabaseEntry(String name, int position) {
-        String selection = DatabaseHelper.KEY_WORKOUT_NAME + " = ?";
-        String[] selectionArgs = { "" + name };
-
         // delete record in database containing selected workout name
-        int deletedRows = dbRead.delete(DatabaseHelper.TABLE_NAME, selection, selectionArgs );
+        appDatabase.deleteWorkoutsDatabaseEntry(name, position);
 
         // delete item from recycler view
         workoutInformationList.remove(position);
         adapter.notifyDataSetChanged();
-
     }
 
     // Opens activity which allows user to add their workout information
@@ -143,7 +126,7 @@ public class Workouts extends AppCompatActivity {
         Intent intent = new Intent(this, AddWorkout.class);
         String[] workoutNames = getNames();
         intent.putExtra("Workout Names", workoutNames);
-        launchSomeActivity.launch(intent);
+        launchAddWorkout.launch(intent);
     }
 
     // Helper function which generates all the names for each workout in database
@@ -179,27 +162,7 @@ public class Workouts extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... Strings) {
-            String nameCol = DatabaseHelper.KEY_WORKOUT_NAME;
-            String setsCol = DatabaseHelper.KEY_SETS;
-            String exercisesCol = DatabaseHelper.KEY_EXERCISES;
-            String exerciseTimeCol = DatabaseHelper.KEY_EXERCISE_TIME;
-            String restCol = DatabaseHelper.KEY_REST_TIME;
-            String recoveryCol = DatabaseHelper.KEY_RECOVERY_TIME;
-            // Loop through each element in cursor, and add to list
-            while(cursor.moveToNext()) {
-                String id = cursor.getString(cursor.getColumnIndexOrThrow(nameCol));
-                String sets = cursor.getString(cursor.getColumnIndexOrThrow(setsCol));
-                String exercises = cursor.getString(cursor.getColumnIndexOrThrow(exercisesCol));
-                String exerciseTime = cursor.getString(cursor.getColumnIndexOrThrow(exerciseTimeCol));
-                String rest = cursor.getString(cursor.getColumnIndexOrThrow(restCol));
-                String recovery = cursor.getString(cursor.getColumnIndexOrThrow(recoveryCol));
-
-                String[] record =  {id, sets, exercises, exerciseTime, rest, recovery};
-                workoutInformationList.add(record);
-
-            }
-            cursor.close();
-
+            appDatabase.addWorkoutsFromDatabase(workoutInformationList);
             return null;
         }
     }

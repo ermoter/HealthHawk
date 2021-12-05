@@ -15,4 +15,5 @@
     <string name="workout_info">Workout Information</string>
     <string name="add_your_workout_title">Fill In The Following Fields</string>
     <string name="workouts_title">Your Workouts</string>
+    <string name="workout_table_name">Workouts</string>
 </resources>

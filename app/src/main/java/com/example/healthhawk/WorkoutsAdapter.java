@@ -87,7 +87,6 @@ public class WorkoutsAdapter extends RecyclerView.Adapter<WorkoutsAdapter.ViewHo
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
-
             workoutName = view.findViewById(R.id.button_workout_items);
 
         }
