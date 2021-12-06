@@ -6,13 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <ListView-->
+<!--        android:id="@+id/foodListView"-->
+<!--        android:layout_width="199dp"-->
+<!--        android:layout_height="417dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.2" />-->
 
+<!--    <TextView-->
+<!--        android:id="@+id/totalCaloriesTextView"-->
+<!--        android:layout_width="411dp"-->
+<!--        android:layout_height="29dp"-->
+<!--        android:layout_marginBottom="184dp"-->
+<!--        android:text="@string/totalCalories"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--    <ListView-->
+<!--        android:id="@+id/calorieListView"-->
+<!--        android:layout_width="212dp"-->
+<!--        android:layout_height="418dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.205" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/foodEditText"-->
+<!--        android:layout_width="139dp"-->
+<!--        android:layout_height="44dp"-->
+<!--        android:layout_marginTop="44dp"-->
+<!--        android:hint="@string/textFood"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.117"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/totalCaloriesTextView" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/calorieEditText"-->
+<!--        android:layout_width="136dp"-->
+<!--        android:layout_height="42dp"-->
+<!--        android:hint="@string/textCalories"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.116"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/foodEditText"-->
+<!--        app:layout_constraintVertical_bias="0.188" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/addItemsButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="44dp"-->
+<!--        android:text="@string/addItems"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.891"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/totalCaloriesTextView"-->
+<!--        app:layout_constraintVertical_bias="0.532" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/foodTitleTextView"-->
+<!--        android:layout_width="199dp"-->
+<!--        android:layout_height="36dp"-->
+<!--        android:text="@string/foodTitle"-->
+<!--        android:textSize="22sp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/foodListView"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/calorieTitleTextView"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/calorieTitleTextView"-->
+<!--        android:layout_width="208dp"-->
+<!--        android:layout_height="36dp"-->
+<!--        android:layout_marginEnd="4dp"-->
+<!--        android:gravity="right"-->
+<!--        android:text="@string/calorieTitle"-->
+<!--        android:textSize="22sp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/calorieListView"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

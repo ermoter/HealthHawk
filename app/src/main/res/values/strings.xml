@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">HealthHawk</string>
+    <string name="totalCalories"></string>
+    <string name="textFood">Food Name:</string>
+    <string name="textCalories">Calories:</string>
+    <string name="addItems">Add</string>
+    <string name="foodTitle">Food Items</string>
+    <string name="calorieTitle">Calories</string>
 </resources>
