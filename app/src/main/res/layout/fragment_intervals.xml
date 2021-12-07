@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <NumberPicker
+        android:id="@+id/minutes_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/picker_minutes_tv"
+        android:layout_toLeftOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/picker_minutes_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_alignLeft="@+id/minutes_picker"
+        android:text="@string/minutes"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#3276b1"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/picker_seconds_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_alignRight="@+id/seconds_picker"
+        android:layout_toRightOf="@+id/textView3"
+        android:gravity="right"
+        android:text="@string/seconds"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#3276b1"
+        android:textStyle="bold|italic" />
+
+    <Button
+        android:id="@+id/ok_intervals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/minutes_picker"
+        android:layout_toRightOf="@+id/minutes_picker"
+        android:text="  OK  "
+        android:textColor="#3276b1" />
+
+    <NumberPicker
+        android:id="@+id/seconds_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ok_intervals"
+        android:layout_toRightOf="@+id/ok_intervals"
+        android:gravity="right" />
+</RelativeLayout>
