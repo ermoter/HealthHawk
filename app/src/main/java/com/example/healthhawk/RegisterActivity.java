@@ -10,13 +10,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.sql.SQLException;
 
@@ -29,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity
     EditText emailEditText;
     EditText passwordEditText;
     EditText rePasswordEditText;
+    Toolbar toolbar;
     AppDatabase database;
     SharedPreferences prefs;
     SharedPreferences.Editor spEditor;
@@ -52,6 +58,9 @@ public class RegisterActivity extends AppCompatActivity
         emailEditText       = (EditText) this.findViewById(R.id.editTextTextEmailAddress);
         passwordEditText    = (EditText) this.findViewById(R.id.editTextTextPassword);
         rePasswordEditText  = (EditText) this.findViewById(R.id.editTextTextRePassword);
+        toolbar             = (Toolbar) this.findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         // Create and open database
         database = new AppDatabase(this);
         try { database.open(); } catch (SQLException throwables) { throwables.printStackTrace(); }
@@ -70,6 +79,30 @@ public class RegisterActivity extends AppCompatActivity
             @Override
             public void onClick(View v) { register(); }
         });
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.help_menu, menu);
+        return true ;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.help_menu_item:
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                builder.setMessage(
+                        "Name:      RegisterActivity\n" +
+                        "Version:   3.0\n" +
+                        "Author:    Sebastian Koller\n\n" +
+                        "Description:\n" +
+                        "...");
+                builder.setTitle("Activity Information");
+                builder.setNeutralButton("Done", null);
+                builder.show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /* ------------ Custom Functions ------------ */
