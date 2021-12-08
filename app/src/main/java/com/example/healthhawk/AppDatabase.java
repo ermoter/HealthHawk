@@ -94,8 +94,32 @@ public class AppDatabase
 
     /* ------------ Foods Table Methods ------------ */
     //insertFood
+    public void insertFood(String[] fields) {
+        ContentValues values = new ContentValues();
+
+        // String userName = fields[1];
+        String foodName = fields[0];
+        String calories = fields[1];
+
+        values = new ContentValues();
+        //values.put(dbh.FOODS_COLUMN_USER, userName);
+        values.put(dbh.FOODS_COLUMN_FOOD_NAME, foodName);
+        values.put(dbh.FOODS_COLUMN_CALORIES, calories);
+
+    }
     //deleteFood
+    public void deleteFood(String foodName) {
+
+        String selection = dbh.FOODS_TABLE_NAME + " = ?";
+        String[] selectionArgs = { "" + foodName};
+
+        int deletedRows = dbRead.delete(dbh.FOODS_COLUMN_FOOD_NAME, selection, selectionArgs );
+
+    }
     //getAllFood
+    public void getAllFood() {
+
+    }
     /* ------------ Goals Table Methods ------------ */
 
     /* ------------ Dates Table Methods ------------ */

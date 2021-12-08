@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -22,11 +23,15 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
 
     ArrayList<String> foodList = new ArrayList<String>();
     ArrayList<String> calorieList = new ArrayList<String>();
+    AppDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listviews);
+        try { database.open(); }
+        catch (SQLException throwables) { throwables.printStackTrace(); }
+
         TextView totalCalories  = findViewById(R.id.totalCaloriesTextView);
         TextView inputFood = findViewById(R.id.foodEditText);
         TextView inputCalories = findViewById(R.id.calorieEditText);
@@ -46,8 +51,11 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
             public void onClick(View v) {
                 String text1 = inputFood.getText().toString();
                 String text2 = inputCalories.getText().toString();
+                String[] dbInput = {text1, text2};
                 foodList.add(text1);
                 calorieList.add(text2);
+
+                database.insertFood(dbInput);
 
                 foodAdapter.notifyDataSetChanged();
                 //calorieAdapter.notifyDataSetChanged();
