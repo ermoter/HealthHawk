@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthHawk">
         <activity
+            android:name=".StatsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_stats"
+            android:theme="@style/Theme.HealthHawk.NoActionBar" />
+        <activity
             android:name=".Timer"
             android:exported="true" />
         <activity
@@ -35,6 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".FoodAndCaloriesFunctionality">
 
 
@@ -47,6 +53,9 @@
         <activity android:name=".RegisterActivity">
 
         </activity>
+
+
+
     </application>
 
 </manifest>

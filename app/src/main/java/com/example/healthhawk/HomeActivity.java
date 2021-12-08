@@ -137,9 +137,9 @@ public class HomeActivity extends AppCompatActivity
                         startActivity(intent);
                         break;
                     case R.id.action_stats:
-//                        intent = new Intent(HomeActivity.this,Workouts.class);
-//                        intent.putExtra("USER_ID",currentUserEmail);
-//                        startActivity(intent);
+                        intent = new Intent(HomeActivity.this,StatsActivity.class);
+                        intent.putExtra("USER_ID",currentUserEmail);
+                        startActivity(intent);
                         break;
 
                 }
