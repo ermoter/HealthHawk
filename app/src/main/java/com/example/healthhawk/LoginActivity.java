@@ -11,11 +11,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.SQLException;
@@ -63,6 +68,30 @@ public class LoginActivity extends AppCompatActivity
 
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.help_menu, menu);
+        return true ;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.help_menu_item:
+                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                builder.setMessage(
+                        "Name:      LoginActivity\n" +
+                        "Version:   3.0\n" +
+                        "Author:    Sebastian Koller\n\n" +
+                        "Description:\n" +
+                        "...");
+                builder.setTitle("Activity Information");
+                builder.setNeutralButton("Done", null);
+                builder.show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     /* ------------ Setup ------------ */
     protected void assignElements()
     {
@@ -106,8 +135,8 @@ public class LoginActivity extends AppCompatActivity
             Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
             intent.putExtra("USER_ID",email);
             startActivity(intent);
-            Toast toast = Toast.makeText(getApplicationContext(),"Successful Login!",Toast.LENGTH_SHORT);
-            toast.show();
+//            Toast toast = Toast.makeText(getApplicationContext(),"Successful Login!",Toast.LENGTH_SHORT);
+//            toast.show();
         }
         else
         {

@@ -11,6 +11,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -89,9 +90,9 @@ public class Workouts extends AppCompatActivity {
         });
 
         // set toolbar
-        Toolbar tb = findViewById(R.id.workout_toolbar);
-        tb.setTitle("");
-        setSupportActionBar(tb);
+        ActionBar tb = getSupportActionBar();
+        tb.setTitle("Your Workouts");
+
     }
 
     // Add menu item
@@ -106,7 +107,7 @@ public class Workouts extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.workouts_help_menu_item:
+            case R.id.help_menu_item:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Workouts Activity");
                 builder.setMessage("Author: Ridwan Mursal\n" +
