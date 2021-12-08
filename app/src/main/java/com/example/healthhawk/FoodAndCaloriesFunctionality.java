@@ -1,5 +1,7 @@
 package com.example.healthhawk;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -7,6 +9,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -65,6 +70,30 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
                 inputCalories.setText("");
             }
         });
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.help_menu, menu);
+        return true ;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.help_menu_item:
+                AlertDialog.Builder builder = new AlertDialog.Builder(FoodAndCaloriesFunctionality.this);
+                builder.setMessage(
+                        "Name:      FoodAndCaloriesActivity\n" +
+                                "Version:   3.0\n" +
+                                "Author:    Mohammad Baig\n\n" +
+                                "Description:\n" +
+                                "Add your meals by entering the name of the food and the calories it contained.");
+                builder.setTitle("Activity Information");
+                builder.setNeutralButton("Done", null);
+                builder.show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class FoodAdapter extends ArrayAdapter<String> {

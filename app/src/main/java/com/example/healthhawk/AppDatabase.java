@@ -113,7 +113,7 @@ public class AppDatabase
         String selection = dbh.FOODS_TABLE_NAME + " = ?";
         String[] selectionArgs = { "" + foodName};
 
-        int deletedRows = dbRead.delete(dbh.FOODS_COLUMN_FOOD_NAME, selection, selectionArgs );
+        dbRead.delete(dbh.FOODS_COLUMN_FOOD_NAME, selection, selectionArgs );
 
     }
     //getAllFood
