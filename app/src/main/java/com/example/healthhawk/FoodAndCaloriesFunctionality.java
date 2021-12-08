@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class FoodAndCaloriesFunctionality extends AppCompatActivity {
 
     ArrayList<String> foodList = new ArrayList<String>();
     ArrayList<String> calorieList = new ArrayList<String>();
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = MainActivity.this.getLayoutInflater();
+            LayoutInflater inflater = FoodAndCaloriesFunctionality.this.getLayoutInflater();
 
             View result = null ;
 
