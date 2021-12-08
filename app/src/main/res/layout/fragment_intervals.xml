@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text=""
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
 
     <NumberPicker
         android:id="@+id/minutes_picker"
@@ -29,7 +29,7 @@
         android:layout_below="@+id/textView3"
         android:layout_alignLeft="@+id/minutes_picker"
         android:text="@string/minutes"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="20dp"
         android:textColor="#3276b1"
         android:textStyle="bold|italic" />
 
@@ -42,7 +42,7 @@
         android:layout_toRightOf="@+id/textView3"
         android:gravity="right"
         android:text="@string/seconds"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="20dp"
         android:textColor="#3276b1"
         android:textStyle="bold|italic" />
 
@@ -52,8 +52,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/minutes_picker"
         android:layout_toRightOf="@+id/minutes_picker"
-        android:text="  OK  "
-        android:textColor="#3276b1" />
+        android:text="@string/interval_fragments_ok_button"
+        android:textColor="@color/green" />
 
     <NumberPicker
         android:id="@+id/seconds_picker"

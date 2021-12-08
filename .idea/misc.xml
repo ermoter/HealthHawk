@@ -15,7 +15,10 @@
         <entry key="app/src/main/res/layout/activity_workouts.xml" value="0.19499998433382093" />
         <entry key="app/src/main/res/layout/fragment_intervals.xml" value="0.375" />
         <entry key="app/src/main/res/layout/interavls_fragment.xml" value="0.14447463768115942" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.1933876811594203" />
         <entry key="app/src/main/res/layout/workout_items.xml" value="0.375" />
+        <entry key="app/src/main/res/menu/help_menu.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2953703703703704" />
       </map>
     </option>

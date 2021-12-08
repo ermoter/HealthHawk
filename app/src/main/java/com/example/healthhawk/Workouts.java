@@ -1,10 +1,19 @@
+/*
+Name:   Workouts Activity
+Author: Ridwan Mursal
+Version: 1.0 (12/8/2021)
+Status: Complete
+ */
 package com.example.healthhawk;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +25,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -75,7 +87,42 @@ public class Workouts extends AppCompatActivity {
                 openAddWorkout();
             }
         });
+
+        // set toolbar
+        Toolbar tb = findViewById(R.id.workout_toolbar);
+        tb.setTitle("");
+        setSupportActionBar(tb);
     }
+
+    // Add menu item
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.help_menu, menu);
+
+        return true ;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.workouts_help_menu_item:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Workouts Activity");
+                builder.setMessage("Author: Ridwan Mursal\n" +
+                        "Version Number: 1\n" +
+                        "Instructions: Click on the button on the bottom left corner of the screen.\n" +
+                        "You will be prompted to fill in certain fields so that your workout can be initialized.\n" +
+                        "After filling everything in, you may click on the workout you've just made, and will be taken\n" +
+                        "to a new activity where you can start your workout.");
+                builder.setNegativeButton("Got It!", null);
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     // Create launcher variable inside onAttach or onCreate or global
     ActivityResultLauncher<Intent> launchAddWorkout = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
