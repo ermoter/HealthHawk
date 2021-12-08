@@ -5,10 +5,19 @@
 
     <TextView
         android:id="@+id/foodText"
-        android:textSize="18sp"
-        android:layout_width="212dp"
+        android:layout_width="314dp"
         android:layout_height="35dp"
         android:layout_weight="1"
-        android:text="New Text" />
+        android:text="New Text"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/calorieText"
+        android:layout_width="212dp"
+        android:layout_height="35dp"
+        android:layout_weight="0"
+        android:gravity="right"
+        android:text="New Text"
+        android:textSize="18sp" />
 
 </LinearLayout>

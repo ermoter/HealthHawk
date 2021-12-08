@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-
     ArrayList<String> foodList = new ArrayList<String>();
     ArrayList<String> calorieList = new ArrayList<String>();
 
@@ -27,23 +27,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listviews);
-
-
-
         TextView totalCalories  = findViewById(R.id.totalCaloriesTextView);
         TextView inputFood = findViewById(R.id.foodEditText);
         TextView inputCalories = findViewById(R.id.calorieEditText);
 
         ListView foodListView = findViewById(R.id.foodListView);
-        ListView calorieListView = findViewById(R.id.calorieListView);
+        //ListView calorieListView = findViewById(R.id.calorieListView);
 
         Button buttonAddItems = findViewById(R.id.addItemsButton);
 
         FoodAdapter foodAdapter = new FoodAdapter(this);
-        CalorieAdapter calorieAdapter = new CalorieAdapter(this);
+        //CalorieAdapter calorieAdapter = new CalorieAdapter(this);
 
         foodListView.setAdapter(foodAdapter);
-        calorieListView.setAdapter(calorieAdapter);
+        //calorieListView.setAdapter(calorieAdapter);
 
         buttonAddItems.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -52,9 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 foodList.add(text1);
                 calorieList.add(text2);
 
-
                 foodAdapter.notifyDataSetChanged();
-                calorieAdapter.notifyDataSetChanged();
+                //calorieAdapter.notifyDataSetChanged();
 
                 inputFood.setText("");
                 inputCalories.setText("");
@@ -72,8 +68,13 @@ public class MainActivity extends AppCompatActivity {
             return s;
         }
 
-        public String getItem(int position) {
+        public String getFoodItem(int position) {
             String item = foodList.get(position);
+            return item;
+        }
+
+        public String getCalories(int position) {
+            String item = calorieList.get(position);
             return item;
         }
 
@@ -84,38 +85,41 @@ public class MainActivity extends AppCompatActivity {
 
             result = inflater.inflate(R.layout.food_row, null);
             TextView message = result.findViewById(R.id.foodText);
+            message.setText(getFoodItem(position));
 
-            message.setText(getItem(position));
-
-            return result;
-        }
-    }
-
-    private class CalorieAdapter extends ArrayAdapter<String> {
-        public CalorieAdapter(Context ctx) {
-            super(ctx, 0);
-        }
-
-        public int getCount() {
-            int s = calorieList.size();
-            return s;
-        }
-
-        public String getItem(int position) {
-            String item = calorieList.get(position);
-            return item;
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = MainActivity.this.getLayoutInflater();
-
-            View result = null ;
-
-            result = inflater.inflate(R.layout.calorie_row, null);
-            TextView message = result.findViewById(R.id.calorieText);
-            message.setText(getItem(position));
+            TextView message1 = result.findViewById(R.id.calorieText);
+            message1.setText(getCalories(position));
+            // Log.i("CalorieText: ", message1.getText().toString());
 
             return result;
         }
     }
+
+//    private class CalorieAdapter extends ArrayAdapter<String> {
+//        public CalorieAdapter(Context ctx) {
+//            super(ctx, 0);
+//        }
+//
+//        public int getCount() {
+//            int s = calorieList.size();
+//            return s;
+//        }
+//
+//        public String getItem(int position) {
+//            String item = calorieList.get(position);
+//            return item;
+//        }
+//
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//            LayoutInflater inflater = MainActivity.this.getLayoutInflater();
+//
+//            View result = null ;
+//
+//            result = inflater.inflate(R.layout.food_row, null);
+//            TextView message = result.findViewById(R.id.calorieText);
+//            message.setText(getItem(position));
+//
+//            return result;
+//        }
+//    }
 }

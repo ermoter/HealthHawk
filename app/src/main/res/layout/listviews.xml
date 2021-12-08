@@ -14,7 +14,6 @@
         android:text="@string/foodTitle"
         android:textSize="22sp" />
 
-
     <TextView
         android:id="@+id/calorieTitleTextView"
         android:layout_width="wrap_content"
@@ -29,17 +28,17 @@
 
     <ListView
         android:id="@+id/foodListView"
-        android:layout_width="198dp"
-        android:layout_height="417dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/foodTitleTextView" />
+        android:layout_width="match_parent"
+        android:layout_height="408dp"
+        android:layout_below="@id/foodTitleTextView"
+        android:layout_alignParentLeft="true" />
 
-    <ListView
-        android:id="@+id/calorieListView"
-        android:layout_width="212dp"
-        android:layout_height="417dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/calorieTitleTextView"/>
+<!--    <ListView-->
+<!--        android:id="@+id/calorieListView"-->
+<!--        android:layout_width="212dp"-->
+<!--        android:layout_height="417dp"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_below="@id/calorieTitleTextView"/>-->
 
 
     <TextView
@@ -48,7 +47,7 @@
         android:layout_height="29dp"
         android:layout_marginBottom="184dp"
         android:text="@string/totalCalories"
-        android:layout_below="@id/calorieListView"/>
+        android:layout_below="@id/foodListView"/>
 
 
     <EditText
@@ -74,8 +73,9 @@
         android:id="@+id/addItemsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/calorieListView"
+        android:layout_below="@id/foodListView"
         android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
         android:text="@string/addItems" />
 
 </RelativeLayout>
