@@ -29,6 +29,7 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listviews);
+        database = new AppDatabase(this);
         try { database.open(); }
         catch (SQLException throwables) { throwables.printStackTrace(); }
 
