@@ -29,6 +29,8 @@
             android:name=".Workouts"
             android:exported="true" />
         <activity android:name=".LoginActivity">
+        <activity android:name=".FoodAndCaloriesFunctionality">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

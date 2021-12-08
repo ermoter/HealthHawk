@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/foodTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="217dp"
+        android:text="@string/foodTitle"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/calorieTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="208dp"
+        android:layout_marginEnd="4dp"
+        android:gravity="end"
+        android:text="@string/calorieTitle"
+        android:textSize="22sp" />
+
+    <ListView
+        android:id="@+id/foodListView"
+        android:layout_width="match_parent"
+        android:layout_height="408dp"
+        android:layout_below="@id/foodTitleTextView"
+        android:layout_alignParentLeft="true" />
+
+<!--    <ListView-->
+<!--        android:id="@+id/calorieListView"-->
+<!--        android:layout_width="212dp"-->
+<!--        android:layout_height="417dp"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_below="@id/calorieTitleTextView"/>-->
+
+
+    <TextView
+        android:id="@+id/totalCaloriesTextView"
+        android:layout_width="411dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="184dp"
+        android:text="@string/totalCalories"
+        android:layout_below="@id/foodListView"/>
+
+
+    <EditText
+        android:id="@+id/foodEditText"
+        android:layout_width="139dp"
+        android:layout_height="44dp"
+        android:layout_below="@id/foodListView"
+        android:layout_alignParentLeft="true"
+        android:hint="@string/textFood"
+        android:inputType="text" />
+
+
+    <EditText
+        android:id="@+id/calorieEditText"
+        android:layout_width="136dp"
+        android:layout_height="42dp"
+        android:layout_below="@id/foodEditText"
+        android:layout_alignParentLeft="true"
+        android:hint="@string/textCalories"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/addItemsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/foodListView"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:text="@string/addItems" />
+
+</RelativeLayout>
