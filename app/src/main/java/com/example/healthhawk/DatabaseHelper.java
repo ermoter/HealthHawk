@@ -33,16 +33,12 @@ public class DatabaseHelper extends SQLiteOpenHelper
     public static final String FOODS_COLUMN_USER          = "user";
     public static final String FOODS_COLUMN_FOOD_NAME     = "food_name";
     public static final String FOODS_COLUMN_CALORIES      = "calories";
-    public static final String FOODS_COLUMN_FOOD_TYPE_ID  = "food_type_id";
-    public static final String FOODS_COLUMN_MEAL_TYPE_ID  = "meal_type_id";
 
     private static final String CREATE_FOODS = "CREATE TABLE " +FOODS_TABLE_NAME+"("
             +FOODS_COLUMN_FOOD_ID      + " integer primary key autoincrement, "
-            +FOODS_COLUMN_USER         + " Text, "
+            //+FOODS_COLUMN_USER         + " Text, "
             +FOODS_COLUMN_FOOD_NAME    + " Text, "
-            +FOODS_COLUMN_CALORIES     + " integer, "
-            +FOODS_COLUMN_FOOD_TYPE_ID + " integer, "
-            +FOODS_COLUMN_MEAL_TYPE_ID + " integer)";
+            +FOODS_COLUMN_CALORIES     + " Text)";
 
     /* ------------ Dates Table ------------ */
     public static final String DATES_TABLE_NAME           = "dates";
@@ -71,9 +67,6 @@ public class DatabaseHelper extends SQLiteOpenHelper
     public static final String WORKOUTS_COLUMN_EXERCISE_TIME   = "time_per_exercise";
     public static final String WORKOUTS_COLUMN_REST_TIME       = "rest";
     public static final String WORKOUTS_COLUMN_RECOVERY_TIME   = "recovery";
-
-
-
 
     private static final String CREATE_WORKOUTS = "CREATE TABLE " +WORKOUTS_TABLE_NAME+"("
             +WORKOUTS_COLUMN_WORKOUT_NAME    + " String primary key, "
