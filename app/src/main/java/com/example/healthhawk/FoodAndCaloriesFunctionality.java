@@ -46,6 +46,7 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
         //ListView calorieListView = findViewById(R.id.calorieListView);
 
         Button buttonAddItems = findViewById(R.id.addItemsButton);
+        Button buttonDelItems = findViewById(R.id.deleteItemsButton);
 
         FoodAdapter foodAdapter = new FoodAdapter(this);
         //CalorieAdapter calorieAdapter = new CalorieAdapter(this);
@@ -53,7 +54,10 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
         foodListView.setAdapter(foodAdapter);
         //calorieListView.setAdapter(calorieAdapter);
 
-        database.logFood(foodList, calorieList);
+        if (foodListView.getCount() == 0 && database.isFoodEmpty() == false) {
+            database.getAllFood(foodList, calorieList);
+            foodAdapter.notifyDataSetChanged();
+        }
 
         buttonAddItems.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -62,9 +66,8 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
                 String[] dbInput = {text1, text2};
                 foodList.add(text1);
                 calorieList.add(text2);
-
                 database.insertFood(dbInput);
-                database.getAllFood(foodList, calorieList);
+                // database.getAllFood(foodList, calorieList);
 
                 foodAdapter.notifyDataSetChanged();
                 //calorieAdapter.notifyDataSetChanged();
@@ -74,7 +77,19 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
             }
         });
 
+        buttonDelItems.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                foodList.remove(inputFood.getText().toString());
+                calorieList.remove(inputCalories.getText().toString());
 
+                database.deleteFood(inputFood.getText().toString());
+
+                foodAdapter.remove(inputFood.getText().toString());
+                foodAdapter.remove(inputCalories.getText().toString());
+                foodAdapter.notifyDataSetChanged();
+
+            }
+        });
 
     }
 
@@ -94,7 +109,7 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
                                 "Version:   3.0\n" +
                                 "Author:    Mohammad Baig\n\n" +
                                 "Description:\n" +
-                                "Add your meals by entering the name of the food and the calories it contained.");
+                                "Add your meals by entering the name of the food and the calories it contained. Delete meals in the same way by hitting the delete button.");
                 builder.setTitle("Activity Information");
                 builder.setNeutralButton("Done", null);
                 builder.show();
@@ -133,7 +148,6 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
 
             TextView message1 = result.findViewById(R.id.calorieText);
             message1.setText(getCalories(position));
-            // Log.i("CalorieText: ", message1.getText().toString());
 
             return result;
         }
