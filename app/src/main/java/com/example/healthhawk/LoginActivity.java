@@ -11,11 +11,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.sql.SQLException;
@@ -45,9 +50,9 @@ public class LoginActivity extends AppCompatActivity
 
     protected void onResume() {
         super.onResume();
-
+        passwordEditText.setText("");
         // Reopen database (untested)
-        //try { database.open(); } catch (SQLException throwables) { throwables.printStackTrace(); }
+        try { database.open(); } catch (SQLException throwables) { throwables.printStackTrace(); }
 
         // Updates the emailTextEdit if the user just registered
         prefs = getSharedPreferences("SharedPrefs_Login", Context.MODE_PRIVATE);
@@ -57,10 +62,39 @@ public class LoginActivity extends AppCompatActivity
 
     protected void onPause() {
         super.onPause();
+        database.close();
+    }
 
-        // Close database (untested)
-        // database.close();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        database.close();
+    }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.help_menu, menu);
+        return true ;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.help_menu_item:
+                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                builder.setMessage(
+                        "Name:      LoginActivity\n" +
+                        "Version:   3.0\n" +
+                        "Author:    Sebastian Koller\n\n" +
+                        "Description:\n" +
+                        "Use the two TextEdits to enter your email and password. Once credentials are inputted, " +
+                                "clicking the login button will validate your credentials with the database, if valid you will be sent to the HomeActivity.\n" +
+                        "Use register button if you wish to open the RegisterActivity");
+                builder.setTitle("Activity Information");
+                builder.setNeutralButton("Done", null);
+                builder.show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /* ------------ Setup ------------ */
@@ -106,8 +140,8 @@ public class LoginActivity extends AppCompatActivity
             Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
             intent.putExtra("USER_ID",email);
             startActivity(intent);
-            Toast toast = Toast.makeText(getApplicationContext(),"Successful Login!",Toast.LENGTH_SHORT);
-            toast.show();
+//            Toast toast = Toast.makeText(getApplicationContext(),"Successful Login!",Toast.LENGTH_SHORT);
+//            toast.show();
         }
         else
         {

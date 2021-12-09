@@ -44,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
             +FOODS_COLUMN_FOOD_TYPE_ID + " integer, "
             +FOODS_COLUMN_MEAL_TYPE_ID + " integer)";
 
+
     /* ------------ Dates Table ------------ */
     public static final String DATES_TABLE_NAME           = "dates";
     public static final String DATES_COLUMN_DATE_ID       = "date_id";
@@ -71,9 +72,6 @@ public class DatabaseHelper extends SQLiteOpenHelper
     public static final String WORKOUTS_COLUMN_EXERCISE_TIME   = "time_per_exercise";
     public static final String WORKOUTS_COLUMN_REST_TIME       = "rest";
     public static final String WORKOUTS_COLUMN_RECOVERY_TIME   = "recovery";
-
-
-
 
     private static final String CREATE_WORKOUTS = "CREATE TABLE " +WORKOUTS_TABLE_NAME+"("
             +WORKOUTS_COLUMN_WORKOUT_NAME    + " String primary key, "
@@ -114,6 +112,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
             +CALENDAR_Event    + " Text )";
 
 
+
     /* ------------ Constructor ------------ */
     public DatabaseHelper(Context context) { super(context, DATABASE_NAME, null, DATABASE_VERSION); }
 
@@ -126,7 +125,9 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL(CREATE_DATES);
         db.execSQL(CREATE_GOALS);
         db.execSQL(CREATE_WORKOUTS);
+
         db.execSQL(CALENDAR);
+
     }
 
     @Override
@@ -138,5 +139,6 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS " + DATES_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + WORKOUTS_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " +CALENDAR_TABLE_NAME);
+
     }
 }

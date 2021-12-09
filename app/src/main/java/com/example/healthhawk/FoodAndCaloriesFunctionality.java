@@ -1,5 +1,8 @@
 package com.example.healthhawk;
 
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -7,6 +10,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -14,6 +21,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -22,11 +31,19 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
 
     ArrayList<String> foodList = new ArrayList<String>();
     ArrayList<String> calorieList = new ArrayList<String>();
+    AppDatabase database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listviews);
+
+        database = new AppDatabase(this);
+        try { database.open(); }
+        catch (SQLException throwables) { throwables.printStackTrace(); }
+
+
         TextView totalCalories  = findViewById(R.id.totalCaloriesTextView);
         TextView inputFood = findViewById(R.id.foodEditText);
         TextView inputCalories = findViewById(R.id.calorieEditText);
@@ -35,6 +52,8 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
         //ListView calorieListView = findViewById(R.id.calorieListView);
 
         Button buttonAddItems = findViewById(R.id.addItemsButton);
+        Button buttonDelItems = findViewById(R.id.deleteItemsButton);
+
 
         FoodAdapter foodAdapter = new FoodAdapter(this);
         //CalorieAdapter calorieAdapter = new CalorieAdapter(this);
@@ -42,12 +61,26 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
         foodListView.setAdapter(foodAdapter);
         //calorieListView.setAdapter(calorieAdapter);
 
+
+        if (foodList.isEmpty()) {
+            database.getAllFood(foodList, calorieList);
+            foodAdapter.notifyDataSetChanged();
+        }
+
+        database.logFood();
+
+
         buttonAddItems.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String text1 = inputFood.getText().toString();
                 String text2 = inputCalories.getText().toString();
+
+                String[] dbInput = {text1, text2};
                 foodList.add(text1);
                 calorieList.add(text2);
+                database.insertFood(dbInput);
+                // database.getAllFood(foodList, calorieList);
+
 
                 foodAdapter.notifyDataSetChanged();
                 //calorieAdapter.notifyDataSetChanged();
@@ -56,6 +89,47 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
                 inputCalories.setText("");
             }
         });
+
+
+        buttonDelItems.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                foodList.remove(inputFood.getText().toString());
+                calorieList.remove(inputCalories.getText().toString());
+
+                database.deleteFood(inputFood.getText().toString());
+
+                foodAdapter.remove(inputFood.getText().toString());
+                foodAdapter.remove(inputCalories.getText().toString());
+                foodAdapter.notifyDataSetChanged();
+
+            }
+        });
+
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.help_menu, menu);
+        return true ;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.help_menu_item:
+                AlertDialog.Builder builder = new AlertDialog.Builder(FoodAndCaloriesFunctionality.this);
+                builder.setMessage(
+                        "Name:      FoodAndCaloriesActivity\n" +
+                                "Version:   3.0\n" +
+                                "Author:    Mohammad Baig\n\n" +
+                                "Description:\n" +
+                                "Add your meals by entering the name of the food and the calories it contained.");
+                builder.setTitle("Activity Information");
+                builder.setNeutralButton("Done", null);
+                builder.show();
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 
     private class FoodAdapter extends ArrayAdapter<String> {
@@ -89,7 +163,9 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
 
             TextView message1 = result.findViewById(R.id.calorieText);
             message1.setText(getCalories(position));
+
             // Log.i("CalorieText: ", message1.getText().toString());
+
 
             return result;
         }

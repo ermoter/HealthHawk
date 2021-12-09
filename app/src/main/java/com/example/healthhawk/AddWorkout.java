@@ -134,6 +134,7 @@ public class AddWorkout extends AppCompatActivity {
 
         if ( Arrays.asList(fields).contains("") ) {
             flag = true;
+
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
         }else if (inDatabase(fields[0]) == true) {
             flag = true;
@@ -144,6 +145,18 @@ public class AddWorkout extends AppCompatActivity {
         }else if (exerciseTimeValue.equals("0:00")) {
             flag = true;
             Toast.makeText(this, "Please ensure that the length of each exercise is greater than zero", Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(this, R.string.workouts_error_fields_not_filled, Toast.LENGTH_SHORT).show();
+        }else if (inDatabase(fields[0]) == true) {
+            flag = true;
+            Toast.makeText(this, R.string.workouts_error_already_in_database, Toast.LENGTH_SHORT).show();
+        }else if (isZero(fields[1])) { // check is the number of sets is greater than 0
+            flag = true;
+            Toast.makeText(this, R.string.workouts_error_zero_sets , Toast.LENGTH_SHORT).show();
+        }else if (exerciseTimeValue.equals("0:00")) {
+            flag = true;
+            Toast.makeText(this, R.string.workouts_error_exercise_zero, Toast.LENGTH_SHORT).show();
+
         }
 
         return flag;
