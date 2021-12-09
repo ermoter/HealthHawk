@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthHawk">
         <activity
+            android:name=".StartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".StatsActivity"
             android:exported="true"
             android:label="@string/title_activity_stats"
@@ -34,32 +43,11 @@
             android:name=".Workouts"
             android:exported="true" />
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".FoodAndCaloriesFunctionality">
-
 
         </activity>
-
-        <activity android:name=".HomeActivity">
-
-        </activity>
-
-        <activity android:name=".RegisterActivity">
-
-        </activity>
-
-        <activity android:name=".calendaractivity">
-
-        </activity>
-
-
-
+        <activity android:name=".FoodAndCaloriesFunctionality"></activity>
+        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>
