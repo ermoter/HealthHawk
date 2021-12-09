@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -62,17 +64,25 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
             public void onClick(View v) {
                 String text1 = inputFood.getText().toString();
                 String text2 = inputCalories.getText().toString();
-                String[] dbInput = {text1, text2};
-                foodList.add(text1);
-                calorieList.add(text2);
-                database.insertFood(dbInput);
-                // database.getAllFood(foodList, calorieList);
+                if (TextUtils.isEmpty(text1) || text1 == null) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Food Name cannot be empty", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (TextUtils.isEmpty(text2) || text2 == null) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Calories cannot be empty", Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    String[] dbInput = {text1, text2};
+                    foodList.add(text1);
+                    calorieList.add(text2);
+                    database.insertFood(dbInput);
+                    // database.getAllFood(foodList, calorieList);
 
-                foodAdapter.notifyDataSetChanged();
-                //calorieAdapter.notifyDataSetChanged();
+                    foodAdapter.notifyDataSetChanged();
+                    //calorieAdapter.notifyDataSetChanged();
 
-                inputFood.setText("");
-                inputCalories.setText("");
+                    inputFood.setText("");
+                    inputCalories.setText("");
+                }
             }
         });
 
