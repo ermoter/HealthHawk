@@ -53,6 +53,8 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
         foodListView.setAdapter(foodAdapter);
         //calorieListView.setAdapter(calorieAdapter);
 
+        database.logFood(foodList, calorieList);
+
         buttonAddItems.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String text1 = inputFood.getText().toString();
@@ -62,6 +64,7 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
                 calorieList.add(text2);
 
                 database.insertFood(dbInput);
+                database.getAllFood(foodList, calorieList);
 
                 foodAdapter.notifyDataSetChanged();
                 //calorieAdapter.notifyDataSetChanged();
@@ -70,6 +73,9 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
                 inputCalories.setText("");
             }
         });
+
+
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

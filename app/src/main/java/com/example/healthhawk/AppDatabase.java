@@ -24,7 +24,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -128,8 +130,33 @@ public class AppDatabase
     }
     //getAllFood
     public void getAllFood() {
+    public void getAllFood(ArrayList<String> foodList, ArrayList<String> calorieList) {
 
+//        String[] foodTable;
+//        int i = 0;
+          Cursor c = dbRead.query(dbh.FOODS_TABLE_NAME, null, null, null, null, null, null);
+
+          c.moveToFirst();
+          while (c.moveToNext()) {
+
+              foodList.add(c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_FOOD_NAME)));
+              calorieList.add(c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_CALORIES)));
+          }
+          c.close();
     }
+
+    public void logFood(ArrayList<String> foodList, ArrayList<String> calorieList) {
+        Cursor c = dbRead.query(dbh.FOODS_TABLE_NAME, null, null, null, null, null, null);
+
+        c.moveToFirst();
+        while (c.moveToNext()) {
+
+            Log.i("Food Name: ", c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_FOOD_NAME)));
+            Log.i("Food Cals: ", c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_CALORIES)));
+        }
+        c.close();
+    }
+
     /* ------------ Stats Table Methods ------------ */
 
     public String getStats(){
@@ -147,7 +174,7 @@ public class AppDatabase
         return "";
     }
 
-
+    /* ------------ Goals Table Methods ------------ */
 
 
     /* ------------ Dates Table Methods ------------ */
