@@ -78,9 +78,15 @@ public class StatsActivity extends AppCompatActivity {
         ArrayList<String> calorieList = new ArrayList<>();
         database.getAllFood(foodList,calorieList);
         int total = 0;
-        for(int i=0;i < foodList.size();i++){
-            total+= Integer.parseInt(calorieList.get(i));
 
+        if (calorieList.isEmpty() == false)
+        {
+            for(int i=0;i < foodList.size();i++) {
+
+                String s = calorieList.get(i);
+                if (s == null || s.equals("")) break;
+                total += Integer.parseInt(s);
+            }
         }
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
