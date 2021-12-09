@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/timer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:soundEffectsEnabled="true"
+    android:background="#000000">
+
+    <TextView
+        android:id="@+id/timer_workout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/timer_progress_bar"
+        android:layout_marginBottom="104dp"
+        android:gravity="center"
+        android:text="Workout Title"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/timer_currentWorkout_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/timer_progress_bar"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:text="Bench Press"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+        android:textStyle="bold"></TextView>
+
+    <ProgressBar
+        android:id="@+id/timer_progress_bar"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:indeterminateOnly="false"
+        android:progressDrawable="@drawable/circular_progress_bar" />
+
+    <TextView
+        android:id="@+id/tv_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:soundEffectsEnabled="true"
+        android:text="0:00"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black"
+        android:textSize="40dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@id/timer_progress_bar"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="-193dp"
+        android:layout_toLeftOf="@id/timer_progress_bar"
+        app:srcCompat="@android:drawable/ic_media_play" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@id/timer_progress_bar"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="-232dp"
+        android:layout_toLeftOf="@id/imageButton"
+        app:srcCompat="@android:drawable/ic_media_ff" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_below="@id/timer_progress_bar"
+        android:layout_marginLeft="-177dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="83dp"
+        android:layout_toLeftOf="@id/imageButton"
+
+        app:srcCompat="@android:drawable/ic_media_previous" />
+
+    <TextView
+        android:id="@+id/exercise_number_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageButton3"
+        android:layout_marginTop="8dp"
+        android:text="Exercise 5/10"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"/>
+
+    <TextView
+        android:id="@+id/set_number_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/exercise_number_tv"
+        android:text="Set 3/4"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"/>
+
+</RelativeLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HealthHawk</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="workout_name">Workout Name</string>
+    <string name="sets"># Of Sets</string>
+    <string name="minutes">Minutes</string>
+    <string name="seconds">Seconds</string>
+    <string name="cooldown_sets">Cooldown Between Sets</string>
+    <string name="cooldown_exercises">Cooldown Between Exercises</string>
+    <string name="input_exercises">Enter exercises (seperate with comma, ie pushups,situps)</string>
+    <string name="recovery">Recovery Between Sets:</string>
+    <string name="rest">Rest Between Exercises:</string>
+    <string name="exercise_length">Length Per exercise:</string>
+    <string name="workout_info">Workout Information</string>
+    <string name="add_your_workout_title">Fill In The Following Fields</string>
+    <string name="workouts_title">Your Workouts</string>
+    <string name="workout_table_name">Workouts</string>
+    <string name="interval_fragments_ok_button">Confirm</string>
+</resources>
