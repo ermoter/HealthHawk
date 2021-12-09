@@ -68,4 +68,9 @@
     <string name="passwordFive">Password must be at least 5 characters long!</string>
     <string name="done">Done</string>
 
+    <string name="UPevents">UpcomingEvents: </string>
+    <string name="addEvent">Add Event: </string>
+    <string name="newentry">New Entry</string>
+    <string name="DeleteEntry">Delete Entry</string>
+
 </resources>
