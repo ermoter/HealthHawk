@@ -23,6 +23,7 @@
     <string name="workouts_title">Your Workouts</string>
     <string name="workout_table_name">Workouts</string>
     <string name="interval_fragments_ok_button">Confirm</string>
+    <string name="deleteItems">Delete</string>
     <string name="title_activity_stats">StatsActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Statistics Tracker</string>
