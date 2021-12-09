@@ -50,9 +50,9 @@ public class LoginActivity extends AppCompatActivity
 
     protected void onResume() {
         super.onResume();
-
+        passwordEditText.setText("");
         // Reopen database (untested)
-        //try { database.open(); } catch (SQLException throwables) { throwables.printStackTrace(); }
+        try { database.open(); } catch (SQLException throwables) { throwables.printStackTrace(); }
 
         // Updates the emailTextEdit if the user just registered
         prefs = getSharedPreferences("SharedPrefs_Login", Context.MODE_PRIVATE);
@@ -62,10 +62,13 @@ public class LoginActivity extends AppCompatActivity
 
     protected void onPause() {
         super.onPause();
+        database.close();
+    }
 
-        // Close database (untested)
-        // database.close();
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        database.close();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,7 +87,9 @@ public class LoginActivity extends AppCompatActivity
                         "Version:   3.0\n" +
                         "Author:    Sebastian Koller\n\n" +
                         "Description:\n" +
-                        "...");
+                        "Use the two TextEdits to enter your email and password. Once credentials are inputted, " +
+                                "clicking the login button will validate your credentials with the database, if valid you will be sent to the HomeActivity.\n" +
+                        "Use register button if you wish to open the RegisterActivity");
                 builder.setTitle("Activity Information");
                 builder.setNeutralButton("Done", null);
                 builder.show();

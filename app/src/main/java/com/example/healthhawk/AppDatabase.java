@@ -60,6 +60,16 @@ public class AppDatabase
         if(result==-1) {return false;} else {return true;}
     }
 
+    public boolean deleteUser(String email)
+    {
+        String selection = dbh.USERS_COLUMN_EMAIL + " = ?";
+        String[] selectionArgs = { "" + email};
+
+        int result = db.delete(dbh.USERS_TABLE_NAME, selection, selectionArgs );
+
+        if(result==-1) {return false;} else {return true;}
+    }
+
     public boolean userExists(String email)
     {
         Cursor c = db.rawQuery(
@@ -79,7 +89,7 @@ public class AppDatabase
         {
             return c.getString(c.getColumnIndex(dbh.USERS_COLUMN_NAME));
         }
-        else {return "Unamed Person!";}
+        else {return "Unamed Human!";}
     }
 
     public boolean verifyCredentials(String email, String password)

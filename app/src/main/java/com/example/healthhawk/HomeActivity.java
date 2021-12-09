@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -58,29 +60,72 @@ public class HomeActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         botNavView.setSelectedItemId(R.id.action_home);
+        try { database.open(); } catch (SQLException throwables) { throwables.printStackTrace(); }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        database.close();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        database.close();
     }
 
     // WHAT YOU NEED TO DO THE HELP MENUS STARTS HERE
     //
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = new MenuInflater(this);
-        inflater.inflate(R.menu.help_menu, menu);
+        inflater.inflate(R.menu.home_help_menu, menu);
         return true ;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        AlertDialog.Builder builder;
         switch (item.getItemId()) {
+
             case R.id.help_menu_item:
-                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+                builder = new AlertDialog.Builder(HomeActivity.this);
                 builder.setMessage(
                         "Name:      HomeActivity\n" +
                         "Version:   3.0\n" +
                         "Author:    Sebastian Koller\n\n" +
                         "Description:\n" +
-                        "Use the bottom navigation bar to navigate through activities");
+                        "Use the bottom navigation bar to navigate through activities.\n" +
+                        "You can also delete the current user from the database via toolbar menu.");
                 builder.setTitle("Activity Information");
                 builder.setNeutralButton("Done", null);
+                builder.show();
+                break;
+
+            case R.id.delete_menu_item:
+                String name = database.getName(currentUserEmail);
+                builder = new AlertDialog.Builder(HomeActivity.this);
+                builder.setMessage("Are you sure you want to delete your account?");
+                builder.setTitle("Delete Account");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean deleted = database.deleteUser(currentUserEmail);
+                        if (deleted)
+                        {
+                            Toast toast = Toast.makeText(getApplicationContext(),"Goodbye "+name,Toast.LENGTH_SHORT);
+                            toast.show();
+                            finish();
+                        }
+                        else
+                        {
+                            Toast toast = Toast.makeText(getApplicationContext(),"Could not delete user!",Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+
+                    }
+                });
+                builder.setNegativeButton("No", null);
                 builder.show();
         }
         return super.onOptionsItemSelected(item);
