@@ -198,8 +198,8 @@ public class HomeActivity extends AppCompatActivity
     protected void setWelcomeMessage()
     {
         String name = database.getName(currentUserEmail);
-        String helloMsg = "Hello " + name;
-        String welcomeMsg = "Welcome " + name;
+        String helloMsg = getString(R.string.hello) + " " + name;
+        String welcomeMsg = getString(R.string.welcome) + " " + name;
 
         // TextView
         helloTextView.setText(helloMsg);

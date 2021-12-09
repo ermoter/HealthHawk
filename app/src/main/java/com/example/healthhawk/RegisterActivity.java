@@ -116,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity
                         "Enter credentials into the EditTexts. Click register to add yourself to the AppDatabase." +
                                 "You will be denied if the email account already exists or you've inputted too short of a password");
                 builder.setTitle("Activity Information");
-                builder.setNeutralButton("Done", null);
+                builder.setNeutralButton(getString(R.string.done), null);
                 builder.show();
         }
         return super.onOptionsItemSelected(item);
@@ -140,19 +140,19 @@ public class RegisterActivity extends AppCompatActivity
         // Passwords don't match
         else if (password.equals(rePassword) == false)
         {
-            Toast toast = Toast.makeText(getApplicationContext(),"Passwords do not match!",Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getApplicationContext(),getString(R.string.passwordMismatch),Toast.LENGTH_SHORT);
             toast.show();
         }
         // Email already in use
         else if (database.userExists(email))
         {
-            Toast toast = Toast.makeText(getApplicationContext(),"Email already in use!",Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getApplicationContext(),getString(R.string.emailInUse),Toast.LENGTH_SHORT);
             toast.show();
         }
         // Email already in use
         else if (name.equals(""))
         {
-            Toast toast = Toast.makeText(getApplicationContext(),"Please enter your name!",Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getApplicationContext(),getString(R.string.pleaseEnterName),Toast.LENGTH_SHORT);
             toast.show();
         }
         else
@@ -162,9 +162,9 @@ public class RegisterActivity extends AppCompatActivity
             if (inserted)
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                builder.setMessage("Registration Complete!");
-                builder.setTitle("Success");
-                builder.setNeutralButton("Return to login", new DialogInterface.OnClickListener() {
+                builder.setMessage(R.string.registrationComplete);
+                builder.setTitle(R.string.success);
+                builder.setNeutralButton(R.string.returnToLogin, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
@@ -177,7 +177,7 @@ public class RegisterActivity extends AppCompatActivity
             }
             else
             {
-                Toast toast = Toast.makeText(getApplicationContext(),"Error occurred when inserting user!",Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getApplicationContext(),getString(R.string.errorInserUser),Toast.LENGTH_SHORT);
                 toast.show();
             }
         }
@@ -185,8 +185,8 @@ public class RegisterActivity extends AppCompatActivity
 
     private String isValidPassword(String password)
     {
-        if (password == null)           return "You must enter a password!";
-        else if (password.length() < 5) return "Password must be at least 5 characters long!";
+        if (password == null)           return getString(R.string.badPassword);
+        else if (password.length() < 5) return getString(R.string.passwordFive);
         else                            return "Valid";
     }
 }

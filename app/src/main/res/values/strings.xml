@@ -45,4 +45,26 @@
     <string name="workouts_error_already_in_database">Workout with name already exists, please select another name.</string>
     <string name="workouts_error_zero_sets">Please ensure that more than 0 sets are selected</string>
     <string name="workouts_error_exercise_zero">Please ensure that the length of each exercise is greater than zero</string>
+
+    <!-- Strings for Seb's Activities -->
+    <string name="welcome">Welcome</string>
+    <string name="home">Home</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="re_enter_password">Re-Enter Password</string>
+    <string name="cancel">Cancel</string>
+    <string name="register">Register</string>
+    <string name="name">Name</string>
+    <string name="hello">Hello</string>
+    <string name="passwordMismatch">Passwords do not match!</string>
+    <string name="emailInUse">Email already in use!</string>
+    <string name="pleaseEnterName">Please enter your name!</string>
+    <string name="registrationComplete">Registration Complete!</string>
+    <string name="success">Success</string>
+    <string name="returnToLogin">Return to login</string>
+    <string name="errorInserUser">Error occurred when inserting user!</string>
+    <string name="badPassword">You must enter a password!</string>
+    <string name="passwordFive">Password must be at least 5 characters long!</string>
+    <string name="done">Done</string>
+
 </resources>

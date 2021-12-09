@@ -1,6 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HealthHawk</string>
+
+    <string name="totalCalories"></string>
+    <string name="textFood">Food Name:</string>
+    <string name="textCalories">Calories:</string>
+    <string name="addItems">Add</string>
+    <string name="foodTitle">Food Items</string>
+    <string name="calorieTitle">Calories</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="workout_name">Workout Name</string>
     <string name="sets"># Of Sets</string>
@@ -10,11 +16,55 @@
     <string name="cooldown_exercises">Cooldown Between Exercises</string>
     <string name="input_exercises">Enter exercises (seperate with comma, ie pushups,situps)</string>
     <string name="recovery">Recovery Between Sets:</string>
-    <string name="rest">Rest Between Exercises:</string>
+    <string name="rest">"Rest Between Exercises:"</string>
     <string name="exercise_length">Length Per exercise:</string>
     <string name="workout_info">Workout Information</string>
     <string name="add_your_workout_title">Fill In The Following Fields</string>
     <string name="workouts_title">Your Workouts</string>
     <string name="workout_table_name">Workouts</string>
     <string name="interval_fragments_ok_button">Confirm</string>
+    <string name="title_activity_stats">StatsActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Statistics Tracker</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="timer_rest">Rest</string>
+    <string name="timer_recovery">Recovery</string>
+    <string name="timer_exercise">"Exercise "</string>
+    <string name="done_workout">Done!!</string>
+    <string name="timer_set">"Set "</string>
+    <string name="workouts_snackbar">Workout Has Been Added Successfully</string>
+    <string name="workouts_activity">Workouts Activity</string>
+    <string name="workouts_help_message">\Author: Ridwan Mursal\n\n\                          \Version Number: 1\n\n\                          \Instructions: Click on the button on the bottom left corner of the screen.\n\                         \You will be prompted to fill in certain fields so that your workout can be initialized.\n\                          \After filling everything in, you may click on the workout you\'ve just made, and will be taken\n                          \to a new activity where you can start your workout. You may also delete a workout by long clicking an item\</string>
+    <string name="help_got_it">Got It!</string>
+    <string name="workouts_error_fields_not_filled">Please fill all fields</string>
+    <string name="workouts_error_already_in_database">Workout with name already exists, please select another name.</string>
+    <string name="workouts_error_zero_sets">Please ensure that more than 0 sets are selected</string>
+    <string name="workouts_error_exercise_zero">Please ensure that the length of each exercise is greater than zero</string>
+
+    <!-- Strings for Seb's Activities -->
+    <string name="welcome">Welcome</string>
+    <string name="home">Home</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="re_enter_password">Re-Enter Password</string>
+    <string name="cancel">Cancel</string>
+    <string name="register">Register</string>
+    <string name="name">Name</string>
+    <string name="hello">Hello</string>
+    <string name="passwordMismatch">Passwords do not match!</string>
+    <string name="emailInUse">Email already in use!</string>
+    <string name="pleaseEnterName">Please enter your name!</string>
+    <string name="registrationComplete">Registration Complete!</string>
+    <string name="success">Success</string>
+    <string name="returnToLogin">Return to login</string>
+    <string name="errorInserUser">Error occurred when inserting user!</string>
+    <string name="badPassword">You must enter a password!</string>
+    <string name="passwordFive">Password must be at least 5 characters long!</string>
+    <string name="done">Done</string>
+
 </resources>
