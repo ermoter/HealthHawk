@@ -117,15 +117,16 @@ public class AppDatabase
         //values.put(dbh.FOODS_COLUMN_USER, userName);
         values.put(dbh.FOODS_COLUMN_FOOD_NAME, foodName);
         values.put(dbh.FOODS_COLUMN_CALORIES, calories);
+        db.insert(dbh.FOODS_TABLE_NAME, null, values);
 
     }
     //deleteFood
-    public void deleteFood(String foodName) {
+    public void deleteFood(String foodName) {//, String calories) {
 
-        String selection = dbh.FOODS_TABLE_NAME + " = ?";
+        String selection = dbh.FOODS_COLUMN_FOOD_NAME + " = ?";
         String[] selectionArgs = { "" + foodName};
 
-        dbRead.delete(dbh.FOODS_COLUMN_FOOD_NAME, selection, selectionArgs );
+        db.delete(dbh.FOODS_TABLE_NAME, selection, selectionArgs);
 
     }
     //getAllFood
@@ -137,19 +138,19 @@ public class AppDatabase
 
           c.moveToFirst();
           while (c.moveToNext()) {
-
               foodList.add(c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_FOOD_NAME)));
               calorieList.add(c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_CALORIES)));
           }
           c.close();
     }
 
-    public void logFood(ArrayList<String> foodList, ArrayList<String> calorieList) {
+    public void logFood() {
         Cursor c = dbRead.query(dbh.FOODS_TABLE_NAME, null, null, null, null, null, null);
 
         c.moveToFirst();
+        Log.i("Food Name: ", c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_FOOD_NAME)));
+        Log.i("Food Cals: ", c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_CALORIES)));
         while (c.moveToNext()) {
-
             Log.i("Food Name: ", c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_FOOD_NAME)));
             Log.i("Food Cals: ", c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_CALORIES)));
         }
