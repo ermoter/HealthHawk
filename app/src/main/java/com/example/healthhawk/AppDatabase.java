@@ -144,6 +144,16 @@ public class AppDatabase
           c.close();
     }
 
+    public boolean isFoodEmpty() {
+
+        Cursor c = dbRead.query(dbh.FOODS_TABLE_NAME, null, null, null, null, null, null);
+        if (c.getCount() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void logFood() {
         Cursor c = dbRead.query(dbh.FOODS_TABLE_NAME, null, null, null, null, null, null);
 

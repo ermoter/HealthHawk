@@ -54,12 +54,10 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
         foodListView.setAdapter(foodAdapter);
         //calorieListView.setAdapter(calorieAdapter);
 
-        if (foodList.isEmpty()) {
+        if (foodListView.getCount() == 0 && database.isFoodEmpty() == false) {
             database.getAllFood(foodList, calorieList);
             foodAdapter.notifyDataSetChanged();
         }
-
-        database.logFood();
 
         buttonAddItems.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -111,7 +109,7 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
                                 "Version:   3.0\n" +
                                 "Author:    Mohammad Baig\n\n" +
                                 "Description:\n" +
-                                "Add your meals by entering the name of the food and the calories it contained.");
+                                "Add your meals by entering the name of the food and the calories it contained. Delete meals in the same way by hitting the delete button.");
                 builder.setTitle("Activity Information");
                 builder.setNeutralButton("Done", null);
                 builder.show();
