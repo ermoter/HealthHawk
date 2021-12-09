@@ -12,11 +12,7 @@
         android:layout_width="345dp"
         android:layout_height="41dp"
         android:textStyle="bold"
-<<<<<<< Updated upstream
         android:text="@string/UPevents"
-=======
-        android:text="UpcomingEvents: "
->>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
@@ -29,11 +25,7 @@
         android:layout_width="337dp"
         android:layout_height="50dp"
 
-<<<<<<< Updated upstream
         android:text="@string/addEvent"
-=======
-        android:text="Add Event: "
->>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,11 +46,7 @@
         android:id="@+id/NewEntry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< Updated upstream
         android:text="@string/addEvent"
-=======
-        android:text="New Entry"
->>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.088"
@@ -70,13 +58,8 @@
     <Button
         android:id="@+id/DeleteEntry"
         android:layout_width="157dp"
-<<<<<<< Updated upstream
         android:layout_height="48dp"
         android:text="@string/DeleteEntry"
-=======
-        android:layout_height="45dp"
-        android:text="Delete Entry"
->>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.881"

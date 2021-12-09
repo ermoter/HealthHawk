@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< Updated upstream
+=======
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/amari/Documents/GitHub/HealthHawk/app/src/main/res/layout-land/fragment_blank.xml" value="0.16137566137566137" />
+        <entry key="..\:/Users/amari/Documents/GitHub/HealthHawk/app/src/main/res/layout-port/calanderactivity.xml" value="0.190625" />
+        <entry key="..\:/Users/amari/Documents/GitHub/HealthHawk/app/src/main/res/layout/activity_display_workout_info.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/amari/Documents/GitHub/HealthHawk/app/src/main/res/layout/activity_workouts.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/amari/Documents/GitHub/HealthHawk/app/src/main/res/layout/calanderactivity.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout-land/calanderactivity.xml" value="0.2257495590828924" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout-port/calanderactivity.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/activity_add_workout.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/activity_display_workout_info.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/activity_intervals.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/activity_timer.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/calanderactivity.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/content_main.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/food_row.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/fragment_first.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/fragment_intervals.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/home_layout.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/login_layout.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/register_layout.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/stats.xml" value="0.24547101449275363" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/toolbar.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/workout_items.xml" value="0.26666666666666666" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18072916666666666" />
+        <entry key="app/src/main/res/drawable/circular_progress_bar.xml" value="0.30185185185185187" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.18072916666666666" />
+        <entry key="app/src/main/res/layout/activity_add_workout.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_display_workout_info.xml" value="0.1721014492753623" />
+        <entry key="app/src/main/res/layout/activity_intervals.xml" value="0.19525330408418604" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.14447463768115942" />
+        <entry key="app/src/main/res/layout/activity_timer.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_work_outs.xml" value="0.14447463768115942" />
+        <entry key="app/src/main/res/layout/activity_workouts.xml" value="0.19499998433382093" />
+        <entry key="app/src/main/res/layout/fragment_intervals.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/interavls_fragment.xml" value="0.14447463768115942" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.1933876811594203" />
+        <entry key="app/src/main/res/layout/workout_items.xml" value="0.375" />
+        <entry key="app/src/main/res/menu/help_menu.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2953703703703704" />
+      </map>
+    </option>
+  </component>
+>>>>>>> Stashed changes
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

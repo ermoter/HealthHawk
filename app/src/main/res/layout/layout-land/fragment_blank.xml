@@ -4,85 +4,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".calendaractivity">
+    android:orientation="horizontal"
+    android:id="@+id/Fragment_blank"
+    tools:ignore="MissingDefaultResource">
 
 
     <TextView
         android:id="@+id/UpcomingEvents"
-        android:layout_width="345dp"
-        android:layout_height="41dp"
-        android:textStyle="bold"
-<<<<<<< Updated upstream
+        android:layout_width="341dp"
+        android:layout_height="56dp"
         android:text="@string/UPevents"
-=======
-        android:text="UpcomingEvents: "
->>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.952"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.761"></TextView>
+        app:layout_constraintVertical_bias="0.134"></TextView>
 
     <EditText
         android:id="@+id/Addevent"
-        android:layout_width="337dp"
-        android:layout_height="50dp"
-
-<<<<<<< Updated upstream
+        android:layout_width="341dp"
+        android:layout_height="58dp"
         android:text="@string/addEvent"
-=======
-        android:text="Add Event: "
->>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.953"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.869"></EditText>
+        app:layout_constraintVertical_bias="0.395"></EditText>
 
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="377dp"
-        android:layout_height="404dp"
+        android:layout_width="316dp"
+        android:layout_height="319dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.0" />
+
 
     <Button
         android:id="@+id/NewEntry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< Updated upstream
+        android:textStyle="bold"
         android:text="@string/addEvent"
-=======
-        android:text="New Entry"
->>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.973" />
-
+        app:layout_constraintVertical_bias="0.943" />
 
     <Button
         android:id="@+id/DeleteEntry"
-        android:layout_width="157dp"
-<<<<<<< Updated upstream
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/DeleteEntry"
-=======
-        android:layout_height="45dp"
-        android:text="Delete Entry"
->>>>>>> Stashed changes
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.881"
+        app:layout_constraintHorizontal_bias="0.691"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.972" />
+        app:layout_constraintVertical_bias="0.943" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
