@@ -23,7 +23,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-
 public class FoodAndCaloriesFunctionality extends AppCompatActivity {
 
     ArrayList<String> foodList = new ArrayList<String>();
