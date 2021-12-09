@@ -70,6 +70,9 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(text2) || text2 == null) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Calories cannot be empty", Toast.LENGTH_LONG);
                     toast.show();
+                } else if (TextUtils.isEmpty(text1) && TextUtils.isEmpty(text2)) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Food Name and Calories cannot be empty", Toast.LENGTH_LONG);
+                    toast.show();
                 } else {
                     String[] dbInput = {text1, text2};
                     foodList.add(text1);
@@ -88,15 +91,31 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
 
         buttonDelItems.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                foodList.remove(inputFood.getText().toString());
-                calorieList.remove(inputCalories.getText().toString());
+                String text1 = inputFood.getText().toString();
+                String text2 = inputCalories.getText().toString();
 
-                database.deleteFood(inputFood.getText().toString());
+                if (TextUtils.isEmpty(text1) || text1 == null) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Food Name cannot be empty", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (TextUtils.isEmpty(text2) || text2 == null) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Calories cannot be empty", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (TextUtils.isEmpty(text1) && TextUtils.isEmpty(text2)) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Food Name and Calories cannot be empty", Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    foodList.remove(text1);
+                    calorieList.remove(text2);
 
-                foodAdapter.remove(inputFood.getText().toString());
-                foodAdapter.remove(inputCalories.getText().toString());
-                foodAdapter.notifyDataSetChanged();
+                    database.deleteFood(text1);
 
+                    foodAdapter.remove(text1);
+                    foodAdapter.remove(text2);
+                    foodAdapter.notifyDataSetChanged();
+
+                    inputFood.setText("");
+                    inputCalories.setText("");
+                }
             }
         });
 
