@@ -129,7 +129,6 @@ public class AppDatabase
 
     }
     //getAllFood
-    public void getAllFood() {
     public void getAllFood(ArrayList<String> foodList, ArrayList<String> calorieList) {
 
 //        String[] foodTable;
