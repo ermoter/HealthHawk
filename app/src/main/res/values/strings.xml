@@ -23,10 +23,36 @@
     <string name="workouts_title">Your Workouts</string>
     <string name="workout_table_name">Workouts</string>
     <string name="interval_fragments_ok_button">Confirm</string>
+
     <string name="UPevents">UpcomingEvents: </string>
     <string name="addEvent">Add Event: </string>
     <string name="newentry">New Entry</string>
     <string name="DeleteEntry">Delete Entry</string>
 
+
+
+    <string name="deleteItems">Delete</string>
+    <string name="title_activity_stats">StatsActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Statistics Tracker</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="timer_rest">Rest</string>
+    <string name="timer_recovery">Recovery</string>
+    <string name="timer_exercise">"Exercise "</string>
+    <string name="done_workout">Done!!</string>
+    <string name="timer_set">"Set "</string>
+    <string name="workouts_snackbar">Workout Has Been Added Successfully</string>
+    <string name="workouts_activity">Workouts Activity</string>
+    <string name="workouts_help_message">\Author: Ridwan Mursal\n\n\                          \Version Number: 1\n\n\                          \Instructions: Click on the button on the bottom left corner of the screen.\n\                         \You will be prompted to fill in certain fields so that your workout can be initialized.\n\                          \After filling everything in, you may click on the workout you\'ve just made, and will be taken\n                          \to a new activity where you can start your workout. You may also delete a workout by long clicking an item\</string>
+    <string name="help_got_it">Got It!</string>
+    <string name="workouts_error_fields_not_filled">Please fill all fields</string>
+    <string name="workouts_error_already_in_database">Workout with name already exists, please select another name.</string>
+    <string name="workouts_error_zero_sets">Please ensure that more than 0 sets are selected</string>
+    <string name="workouts_error_exercise_zero">Please ensure that the length of each exercise is greater than zero</string>
 
 </resources>

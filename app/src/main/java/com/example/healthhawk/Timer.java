@@ -177,8 +177,8 @@ public class Timer extends AppCompatActivity {
     private void initRest() {
         progressBarCounter = 0;
         setTextColorBlue();
-        t1.speak("Rest", TextToSpeech.QUEUE_FLUSH, null, null);
-        header.setText("Rest");
+        t1.speak(getString(R.string.timer_rest), TextToSpeech.QUEUE_FLUSH, null, null);
+        header.setText(R.string.timer_rest );
         startTimer(restBetweenExercises);
 
     }
@@ -194,8 +194,8 @@ public class Timer extends AppCompatActivity {
         else {
             progressBarCounter = 0;
             setTextColourGreen();
-            t1.speak("Recovery", TextToSpeech.QUEUE_FLUSH, null, null);
-            header.setText("Recovery");
+            t1.speak(getString(R.string.timer_recovery), TextToSpeech.QUEUE_FLUSH, null, null);
+            header.setText(R.string.timer_recovery);
 
             intervalsCompleted = -1;
             startTimer(recoveryBetweenSets);
@@ -203,8 +203,8 @@ public class Timer extends AppCompatActivity {
     }
 
     private void initWorkout() {
-        exerciseNumberTV.setText("Exercise " + (exerciseIndex+1) + "/" +  exercises.length);
-        setNumberTV.setText("Set " + (numberOfSets-setsRemaining) + "/" +  numberOfSets);
+        exerciseNumberTV.setText(getString(R.string.timer_exercise) + (exerciseIndex+1) + "/" +  exercises.length);
+        setNumberTV.setText(getString(R.string.timer_set) + (numberOfSets-setsRemaining) + "/" +  numberOfSets);
         progressBarCounter = 0;
         setTextColorRed();
         t1.speak(exercises[exerciseIndex], TextToSpeech.QUEUE_FLUSH, null, null);
@@ -243,7 +243,7 @@ public class Timer extends AppCompatActivity {
                         initRecovery();
 
                     }else {
-                        timerTextView.setText("Done");
+                        timerTextView.setText(R.string.done_workout);
                     }
 
                 }

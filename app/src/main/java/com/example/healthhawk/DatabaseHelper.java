@@ -44,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
             +FOODS_COLUMN_FOOD_TYPE_ID + " integer, "
             +FOODS_COLUMN_MEAL_TYPE_ID + " integer)";
 
+
     /* ------------ Dates Table ------------ */
     public static final String DATES_TABLE_NAME           = "dates";
     public static final String DATES_COLUMN_DATE_ID       = "date_id";
@@ -72,9 +73,6 @@ public class DatabaseHelper extends SQLiteOpenHelper
     public static final String WORKOUTS_COLUMN_REST_TIME       = "rest";
     public static final String WORKOUTS_COLUMN_RECOVERY_TIME   = "recovery";
 
-
-
-
     private static final String CREATE_WORKOUTS = "CREATE TABLE " +WORKOUTS_TABLE_NAME+"("
             +WORKOUTS_COLUMN_WORKOUT_NAME    + " String primary key, "
             +WORKOUTS_COLUMN_SETS   		 + " integer, "
@@ -102,6 +100,22 @@ public class DatabaseHelper extends SQLiteOpenHelper
             +GOALS_COLUMN_DESCRIPTION  + " Text,"
             +GOALS_COLUMN_ACHIEVED     + " boolean)";
 
+<<<<<<< HEAD
+=======
+    /* ------------ Calendar Table  ------------ */
+
+    public static final String CALENDAR_Date= "Date";
+    public static final String CALENDAR_Event="Event";
+    public static final String CALENDAR_TABLE_NAME           = "EventCalendar";
+
+    private static final String CALENDAR = "CREATE TABLE " +CALENDAR_TABLE_NAME+"("
+            +FOODS_COLUMN_FOOD_ID      + " integer primary key autoincrement, "
+            +CALENDAR_Date         + " Text, "
+            +CALENDAR_Event    + " Text )";
+
+
+
+>>>>>>> 8374bd2732d2fa75142cbd10e33ce11eb89f100d
     /* ------------ Constructor ------------ */
     public DatabaseHelper(Context context) { super(context, DATABASE_NAME, null, DATABASE_VERSION); }
 
@@ -114,6 +128,12 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL(CREATE_DATES);
         db.execSQL(CREATE_GOALS);
         db.execSQL(CREATE_WORKOUTS);
+<<<<<<< HEAD
+=======
+
+        db.execSQL(CALENDAR);
+
+>>>>>>> 8374bd2732d2fa75142cbd10e33ce11eb89f100d
     }
 
     @Override
@@ -124,5 +144,10 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS " + GOALS_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + DATES_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + WORKOUTS_TABLE_NAME);
+<<<<<<< HEAD
+=======
+        db.execSQL("DROP TABLE IF EXISTS " +CALENDAR_TABLE_NAME);
+
+>>>>>>> 8374bd2732d2fa75142cbd10e33ce11eb89f100d
     }
 }

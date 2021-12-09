@@ -5,7 +5,7 @@ Contributors:
     Amari Maynard
     - dates table methods
     Eric Tran
-    - goals table methods
+    - stats table methods
     Mohammad Baig
     - foods table methods
     Ridwan Mursal
@@ -24,10 +24,16 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+
+import android.util.Log;
+
+import java.sql.Array;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -64,6 +70,18 @@ public class AppDatabase
         if(result==-1) {return false;} else {return true;}
     }
 
+
+    public boolean deleteUser(String email)
+    {
+        String selection = dbh.USERS_COLUMN_EMAIL + " = ?";
+        String[] selectionArgs = { "" + email};
+
+        int result = db.delete(dbh.USERS_TABLE_NAME, selection, selectionArgs );
+
+        if(result==-1) {return false;} else {return true;}
+    }
+
+
     public boolean userExists(String email)
     {
         Cursor c = db.rawQuery(
@@ -83,7 +101,9 @@ public class AppDatabase
         {
             return c.getString(c.getColumnIndex(dbh.USERS_COLUMN_NAME));
         }
+
         else {return "Unamed Person!";}
+
     }
 
     public boolean verifyCredentials(String email, String password)
@@ -101,6 +121,71 @@ public class AppDatabase
     //deleteFood
     //getAllFood
     /* ------------ Goals Table Methods ------------ */
+
+
+    public void insertFood(String[] fields) {
+        ContentValues values = new ContentValues();
+
+        // String userName = fields[1];
+        String foodName = fields[0];
+        String calories = fields[1];
+
+        values = new ContentValues();
+        //values.put(dbh.FOODS_COLUMN_USER, userName);
+        values.put(dbh.FOODS_COLUMN_FOOD_NAME, foodName);
+        values.put(dbh.FOODS_COLUMN_CALORIES, calories);
+        db.insert(dbh.FOODS_TABLE_NAME, null, values);
+
+    }
+    //deleteFood
+    public void deleteFood(String foodName) {//, String calories) {
+
+        String selection = dbh.FOODS_COLUMN_FOOD_NAME + " = ?";
+        String[] selectionArgs = { "" + foodName};
+
+        db.delete(dbh.FOODS_TABLE_NAME, selection, selectionArgs);
+
+    }
+    //getAllFood
+    public void getAllFood(ArrayList<String> foodList, ArrayList<String> calorieList) {
+
+//        String[] foodTable;
+//        int i = 0;
+          Cursor c = dbRead.query(dbh.FOODS_TABLE_NAME, null, null, null, null, null, null);
+
+          c.moveToFirst();
+          while (c.moveToNext()) {
+              foodList.add(c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_FOOD_NAME)));
+              calorieList.add(c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_CALORIES)));
+          }
+          c.close();
+    }
+
+    public void logFood() {
+        Cursor c = dbRead.query(dbh.FOODS_TABLE_NAME, null, null, null, null, null, null);
+
+        c.moveToFirst();
+        Log.i("Food Name: ", c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_FOOD_NAME)));
+        Log.i("Food Cals: ", c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_CALORIES)));
+        while (c.moveToNext()) {
+            Log.i("Food Name: ", c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_FOOD_NAME)));
+            Log.i("Food Cals: ", c.getString(c.getColumnIndexOrThrow(dbh.FOODS_COLUMN_CALORIES)));
+        }
+        c.close();
+    }
+
+    /* ------------ Stats Table Methods ------------ */
+
+    public String getStats(){
+
+
+
+        return "0";
+    }
+
+    /* ------------ Goals Table Methods ------------ */
+
+
 
     /* ------------ Dates Table Methods ------------ */
 
@@ -165,6 +250,7 @@ public class AppDatabase
         }
         cursor.close();
     }
+
 
 
     /* ------------ Calandar Table Methods ------------ */
