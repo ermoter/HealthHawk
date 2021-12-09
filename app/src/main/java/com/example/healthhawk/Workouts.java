@@ -91,7 +91,7 @@ public class Workouts extends AppCompatActivity {
 
         // set toolbar
         ActionBar tb = getSupportActionBar();
-        tb.setTitle("Your Workouts");
+        tb.setTitle(getString(R.string.workouts_title));
 
     }
 
@@ -109,14 +109,9 @@ public class Workouts extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.help_menu_item:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Workouts Activity");
-                builder.setMessage("Author: Ridwan Mursal\n" +
-                        "Version Number: 1\n" +
-                        "Instructions: Click on the button on the bottom left corner of the screen.\n" +
-                        "You will be prompted to fill in certain fields so that your workout can be initialized.\n" +
-                        "After filling everything in, you may click on the workout you've just made, and will be taken\n" +
-                        "to a new activity where you can start your workout.");
-                builder.setNegativeButton("Got It!", null);
+                builder.setTitle(R.string.workouts_activity);
+                builder.setMessage(R.string.workouts_help_message);
+                builder.setNegativeButton(R.string.help_got_it, null);
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
@@ -133,7 +128,7 @@ public class Workouts extends AppCompatActivity {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         String[] fields = data.getStringArrayExtra(AddWorkout.RESULT_VALUE);
-                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.workouts_constraint_layout), fields[0] + " Workout Has Been Added Successfully", Snackbar.LENGTH_SHORT);
+                        Snackbar mySnackbar = Snackbar.make(findViewById(R.id.workouts_constraint_layout), fields[0] + " " + getString(R.string.workouts_snackbar), Snackbar.LENGTH_SHORT);
                         mySnackbar.show();
                         // Update view and database
                         insertToDatabase(fields);
