@@ -14,16 +14,12 @@
         <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/food_row.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/fragment_first.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/fragment_intervals.xml" value="0.24547101449275363" />
-        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/fragment_second.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/home_layout.xml" value="0.26666666666666666" />
-        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/listviews.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/login_layout.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/register_layout.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/stats.xml" value="0.24547101449275363" />
         <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/toolbar.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/layout/workout_items.xml" value="0.26666666666666666" />
-        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/menu/botnav_menu.xml" value="0.26666666666666666" />
-        <entry key="..\:/Users/ericm/Documents/GitHub/HealthHawk/app/src/main/res/menu/help_menu.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18072916666666666" />
         <entry key="app/src/main/res/drawable/circular_progress_bar.xml" value="0.30185185185185187" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.18072916666666666" />
@@ -34,7 +30,9 @@
         <entry key="app/src/main/res/layout/activity_timer.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_work_outs.xml" value="0.14447463768115942" />
         <entry key="app/src/main/res/layout/activity_workouts.xml" value="0.19499998433382093" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_intervals.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/interavls_fragment.xml" value="0.14447463768115942" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.1933876811594203" />
         <entry key="app/src/main/res/layout/workout_items.xml" value="0.375" />
