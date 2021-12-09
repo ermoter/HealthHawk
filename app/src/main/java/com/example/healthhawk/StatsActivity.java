@@ -26,6 +26,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.healthhawk.databinding.StatsBinding;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -65,14 +66,14 @@ public class StatsActivity extends AppCompatActivity {
             public String formatLabel(double value, boolean isValueX) {
                 if (isValueX) {
                     // show normal x values
-                    return "amount of food eaten: "+super.formatLabel(value, isValueX) ;
+                    return super.formatLabel(value, isValueX) ;
                 } else {
                     // show currency for y values
                     return super.formatLabel(value, isValueX) + " calories";
                 }
             }
         });
-        //avg calorie per food
+//        avg calorie per food
         ArrayList<String> foodList = new ArrayList<>();
         ArrayList<String> calorieList = new ArrayList<>();
         database.getAllFood(foodList,calorieList);
@@ -84,11 +85,13 @@ public class StatsActivity extends AppCompatActivity {
 
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
 //                new DataPoint(Integer.parseInt(sqLiteDatabase.getStats()), 5),
-                new DataPoint(foodList.size(),total),
+//                new DataPoint(1,250),
+                new DataPoint(1, 0),
+                new DataPoint(2, total),
+                new DataPoint(3, 0)
 
         });
         graph.addSeries(series);
-
         setupNavigation();
 
 
