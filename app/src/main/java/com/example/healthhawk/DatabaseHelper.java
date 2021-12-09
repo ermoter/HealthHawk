@@ -102,18 +102,6 @@ public class DatabaseHelper extends SQLiteOpenHelper
             +GOALS_COLUMN_DESCRIPTION  + " Text,"
             +GOALS_COLUMN_ACHIEVED     + " boolean)";
 
-    /* ------------ Calendar Table  ------------ */
-
-    public static final String CALENDAR_Date= "Date";
-    public static final String CALENDAR_Event="Event";
-    public static final String CALENDAR_TABLE_NAME           = "EventCalendar";
-
-    private static final String CALENDAR = "CREATE TABLE " +CALENDAR_TABLE_NAME+"("
-            +FOODS_COLUMN_FOOD_ID      + " integer primary key autoincrement, "
-            +CALENDAR_Date         + " Text, "
-            +CALENDAR_Event    + " Text )";
-
-
     /* ------------ Constructor ------------ */
     public DatabaseHelper(Context context) { super(context, DATABASE_NAME, null, DATABASE_VERSION); }
 
@@ -126,7 +114,6 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL(CREATE_DATES);
         db.execSQL(CREATE_GOALS);
         db.execSQL(CREATE_WORKOUTS);
-        db.execSQL(CALENDAR);
     }
 
     @Override
@@ -137,6 +124,5 @@ public class DatabaseHelper extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS " + GOALS_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + DATES_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + WORKOUTS_TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " +CALENDAR_TABLE_NAME);
     }
 }

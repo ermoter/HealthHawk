@@ -9,11 +9,7 @@
 
     <fragment
         android:id="@+id/frg1"
-<<<<<<< Updated upstream
         android:name="com.example.healthhawk.BlankFragment"
-=======
-        android:name="com.example.calander.BlankFragment"
->>>>>>> Stashed changes
         android:layout_width="738dp"
         android:layout_height="298dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -168,7 +168,7 @@ public class AppDatabase
 
 
     /* ------------ Calandar Table Methods ------------ */
-    public void InsertDatabase(View view, String selectedDate, EditText AddEvent, TextView UpcomingEvents, Button AddEventbtn){
+    public void InsertDatabase(View view, String selectedDate, EditText AddEvent, TextView UpcomingEvents,Button AddEventbtn){
 
         String query = "Select Event from EventCalendar where Date = " + selectedDate;
         try{
@@ -196,6 +196,11 @@ public class AppDatabase
 
 
     }
+
+
+
+
+
 
 
 

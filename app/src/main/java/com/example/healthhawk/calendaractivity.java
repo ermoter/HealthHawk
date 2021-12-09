@@ -25,7 +25,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class calendaractivity extends AppCompatActivity {
-
+    private mySQLiteDBHandler dbHandler;
     private EditText AddEvent;
     private TextView UpcomingEvents;
     private CalendarView calendarView;
@@ -71,15 +71,6 @@ public class calendaractivity extends AppCompatActivity {
             }
         });
 
-        delebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Deletelment(view);
-                AppDB.Deletelment(view,selectedDate,AddEvent,UpcomingEvents,AddEventbtn);
-
-            }
-
-        });
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
