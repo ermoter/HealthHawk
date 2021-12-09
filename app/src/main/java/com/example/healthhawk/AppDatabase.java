@@ -5,7 +5,7 @@ Contributors:
     Amari Maynard
     - dates table methods
     Eric Tran
-    - goals table methods
+    - stats table methods
     Mohammad Baig
     - foods table methods
     Ridwan Mursal
@@ -120,7 +120,25 @@ public class AppDatabase
     public void getAllFood() {
 
     }
-    /* ------------ Goals Table Methods ------------ */
+    /* ------------ Stats Table Methods ------------ */
+
+    public String getStats(){
+
+//        Cursor c = db.rawQuery(
+//                "SELECT * FROM "+ dbh.USERS_TABLE_NAME+
+//                        " WHERE "+ dbh.USERS_COLUMN_EMAIL+" = ?",new String[] {email});
+//
+//        if (c.moveToFirst())
+//        {
+//            return c.getString(c.getColumnIndex(dbh.USERS_COLUMN_NAME));
+//        }
+//        else {return "Unamed Person!";}
+
+        return "";
+    }
+
+
+
 
     /* ------------ Dates Table Methods ------------ */
 

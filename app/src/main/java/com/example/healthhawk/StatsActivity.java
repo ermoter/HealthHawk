@@ -1,6 +1,7 @@
 package com.example.healthhawk;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,6 +21,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.healthhawk.databinding.StatsBinding;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 public class StatsActivity extends AppCompatActivity {
 
@@ -28,8 +32,7 @@ public class StatsActivity extends AppCompatActivity {
 
     /* ------------ Class Members ------------ */
     TextView helloTextView;
-
-    AppDatabase database;
+    AppDatabase sqLiteDatabase;
     String currentUserEmail;
     BottomNavigationView botNavView;
 
@@ -45,6 +48,17 @@ public class StatsActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+        graph.addSeries(series);
+
         setupNavigation();
 
 
@@ -79,6 +93,9 @@ public class StatsActivity extends AppCompatActivity {
 //                        startActivity(intent);
                         break;
                     case R.id.action_workout:
+                        intent = new Intent(StatsActivity.this,Workouts.class);
+                        intent.putExtra("USER_ID",currentUserEmail);
+                        startActivity(intent);
 
                         break;
                     case R.id.action_home:
@@ -105,4 +122,8 @@ public class StatsActivity extends AppCompatActivity {
         });
 
     }
+
+
+
+
 }
