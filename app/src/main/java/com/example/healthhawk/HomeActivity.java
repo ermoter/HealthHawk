@@ -164,9 +164,9 @@ public class HomeActivity extends AppCompatActivity
                 {
                     // User Clicks Workout
                     case R.id.action_date:
-//                        intent = new Intent(HomeActivity.this,Workouts.class);
-//                        intent.putExtra("USER_ID",currentUserEmail);
-//                        startActivity(intent);
+                        intent = new Intent(HomeActivity.this,calendaractivity.class);
+                        intent.putExtra("USER_ID",currentUserEmail);
+                        startActivity(intent);
                         break;
                     case R.id.action_workout:
                         intent = new Intent(HomeActivity.this,Workouts.class);
