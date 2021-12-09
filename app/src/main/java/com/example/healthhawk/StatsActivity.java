@@ -24,11 +24,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.healthhawk.databinding.StatsBinding;
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class StatsActivity extends AppCompatActivity {
 
@@ -56,13 +58,34 @@ public class StatsActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
+
+
+        graph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter() {
+            @Override
+            public String formatLabel(double value, boolean isValueX) {
+                if (isValueX) {
+                    // show normal x values
+                    return "amount of food eaten: "+super.formatLabel(value, isValueX) ;
+                } else {
+                    // show currency for y values
+                    return super.formatLabel(value, isValueX) + " calories";
+                }
+            }
+        });
+        //avg calorie per food
+        ArrayList<String> foodList = new ArrayList<>();
+        ArrayList<String> calorieList = new ArrayList<>();
+        database.getAllFood(foodList,calorieList);
+        int total = 0;
+        for(int i=0;i < foodList.size();i++){
+            total+= Integer.parseInt(calorieList.get(i));
+
+        }
+
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
 //                new DataPoint(Integer.parseInt(sqLiteDatabase.getStats()), 5),
-                new DataPoint(Integer.parseInt(database.getStats()), 5),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
+                new DataPoint(foodList.size(),total),
+
         });
         graph.addSeries(series);
 
