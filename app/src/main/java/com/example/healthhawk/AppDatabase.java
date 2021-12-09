@@ -24,9 +24,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+
 import android.util.Log;
 
 import java.sql.Array;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -62,6 +70,7 @@ public class AppDatabase
         if(result==-1) {return false;} else {return true;}
     }
 
+
     public boolean deleteUser(String email)
     {
         String selection = dbh.USERS_COLUMN_EMAIL + " = ?";
@@ -71,6 +80,7 @@ public class AppDatabase
 
         if(result==-1) {return false;} else {return true;}
     }
+
 
     public boolean userExists(String email)
     {
@@ -91,7 +101,9 @@ public class AppDatabase
         {
             return c.getString(c.getColumnIndex(dbh.USERS_COLUMN_NAME));
         }
-        else {return "Unamed Human!";}
+
+        else {return "Unamed Person!";}
+
     }
 
     public boolean verifyCredentials(String email, String password)
@@ -106,6 +118,11 @@ public class AppDatabase
 
     /* ------------ Foods Table Methods ------------ */
     //insertFood
+    //deleteFood
+    //getAllFood
+    /* ------------ Goals Table Methods ------------ */
+
+
     public void insertFood(String[] fields) {
         ContentValues values = new ContentValues();
 
@@ -167,6 +184,7 @@ public class AppDatabase
     }
 
     /* ------------ Goals Table Methods ------------ */
+
 
 
     /* ------------ Dates Table Methods ------------ */
@@ -231,5 +249,76 @@ public class AppDatabase
             adapterList.add(record);
         }
         cursor.close();
+    }
+
+
+
+    /* ------------ Calandar Table Methods ------------ */
+    public void InsertDatabase(View view, String selectedDate, EditText AddEvent, TextView UpcomingEvents, Button AddEventbtn){
+
+        String query = "Select Event from EventCalendar where Date = " + selectedDate;
+        try{
+
+            db.execSQL("delete from "+ "EventCalendar" + " WHERE " + "Date" + " ="+selectedDate);
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("Date",selectedDate);
+            contentValues.put("Event", AddEvent.getText().toString());
+
+            db.insert("EventCalendar", null, contentValues);
+            ReadDatabase( view,  selectedDate,  AddEvent,  UpcomingEvents,  AddEventbtn);
+        }
+        catch (Exception e){
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("Date",selectedDate);
+            contentValues.put("Event", AddEvent.getText().toString());
+
+            db.insert("EventCalendar", null, contentValues);
+            ReadDatabase(view,  selectedDate,  AddEvent,  UpcomingEvents,  AddEventbtn);
+        }
+
+
+
+
+
+    }
+
+
+
+    public void ReadDatabase(View view, String selectedDate, EditText AddEvent, TextView UpcomingEvents, Button AddEventbtn){
+        String query = "Select Event from EventCalendar where Date = " + selectedDate;
+        try{
+            Cursor cursor = db.rawQuery(query, null);
+            cursor.moveToFirst();
+            String Text = selectedDate.substring(4,5)+"/"+selectedDate.substring(6,7)+"/"+selectedDate.substring(0,4);
+            UpcomingEvents.setText("Upcoming Event: "+Text +"-"+cursor.getString(0));
+            AddEvent.setText("");
+            AddEventbtn.setText(R.string.addEvent);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            UpcomingEvents.setText(R.string.UPevents);
+            AddEvent.setText("");
+            AddEventbtn.setText(R.string.addEvent);
+        }
+    }
+
+    public void Deletelment(View view, String selectedDate, EditText AddEvent, TextView UpcomingEvents, Button AddEventbtn){
+
+        try{
+
+            db.execSQL("delete from "+ "EventCalendar" + " WHERE " + "Date" + " ="+selectedDate);
+            // sqLiteDatabase.execSQL("CREATE TABLE EventCalendar(Date TEXT, Event TEXT)");
+
+
+            UpcomingEvents.setText(R.string.UPevents);
+            AddEvent.setText("");
+            ReadDatabase(view,  selectedDate,  AddEvent,  UpcomingEvents,  AddEventbtn);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            UpcomingEvents.setText(R.string.UPevents);
+            AddEvent.setText("");
+        }
     }
 }

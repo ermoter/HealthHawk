@@ -29,6 +29,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <Button
+        android:id="@+id/goToWorkoutsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/botNavView"
         android:layout_width="match_parent"
@@ -37,6 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/botnav_menu" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

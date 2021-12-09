@@ -23,6 +23,14 @@
     <string name="workouts_title">Your Workouts</string>
     <string name="workout_table_name">Workouts</string>
     <string name="interval_fragments_ok_button">Confirm</string>
+
+    <string name="UPevents">UpcomingEvents: </string>
+    <string name="addEvent">Add Event: </string>
+    <string name="newentry">New Entry</string>
+    <string name="DeleteEntry">Delete Entry</string>
+
+
+
     <string name="deleteItems">Delete</string>
     <string name="title_activity_stats">StatsActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -46,4 +54,5 @@
     <string name="workouts_error_already_in_database">Workout with name already exists, please select another name.</string>
     <string name="workouts_error_zero_sets">Please ensure that more than 0 sets are selected</string>
     <string name="workouts_error_exercise_zero">Please ensure that the length of each exercise is greater than zero</string>
+
 </resources>

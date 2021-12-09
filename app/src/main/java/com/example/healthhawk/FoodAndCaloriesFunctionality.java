@@ -1,5 +1,6 @@
 package com.example.healthhawk;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,13 +33,16 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
     ArrayList<String> calorieList = new ArrayList<String>();
     AppDatabase database;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listviews);
+
         database = new AppDatabase(this);
         try { database.open(); }
         catch (SQLException throwables) { throwables.printStackTrace(); }
+
 
         TextView totalCalories  = findViewById(R.id.totalCaloriesTextView);
         TextView inputFood = findViewById(R.id.foodEditText);
@@ -48,11 +54,13 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
         Button buttonAddItems = findViewById(R.id.addItemsButton);
         Button buttonDelItems = findViewById(R.id.deleteItemsButton);
 
+
         FoodAdapter foodAdapter = new FoodAdapter(this);
         //CalorieAdapter calorieAdapter = new CalorieAdapter(this);
 
         foodListView.setAdapter(foodAdapter);
         //calorieListView.setAdapter(calorieAdapter);
+
 
         if (foodList.isEmpty()) {
             database.getAllFood(foodList, calorieList);
@@ -61,15 +69,18 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
 
         database.logFood();
 
+
         buttonAddItems.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String text1 = inputFood.getText().toString();
                 String text2 = inputCalories.getText().toString();
+
                 String[] dbInput = {text1, text2};
                 foodList.add(text1);
                 calorieList.add(text2);
                 database.insertFood(dbInput);
                 // database.getAllFood(foodList, calorieList);
+
 
                 foodAdapter.notifyDataSetChanged();
                 //calorieAdapter.notifyDataSetChanged();
@@ -78,6 +89,7 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
                 inputCalories.setText("");
             }
         });
+
 
         buttonDelItems.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -117,6 +129,7 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
                 builder.show();
         }
         return super.onOptionsItemSelected(item);
+
     }
 
     private class FoodAdapter extends ArrayAdapter<String> {
@@ -150,6 +163,9 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
 
             TextView message1 = result.findViewById(R.id.calorieText);
             message1.setText(getCalories(position));
+
+            // Log.i("CalorieText: ", message1.getText().toString());
+
 
             return result;
         }
