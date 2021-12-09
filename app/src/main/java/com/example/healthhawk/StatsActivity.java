@@ -1,5 +1,6 @@
 package com.example.healthhawk;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -25,21 +28,24 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.sql.SQLException;
+
 public class StatsActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private StatsBinding binding;
 
     /* ------------ Class Members ------------ */
-    TextView helloTextView;
-    AppDatabase sqLiteDatabase;
+    AppDatabase database;
     String currentUserEmail;
     BottomNavigationView botNavView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        database = new AppDatabase(this);
+        try { database.open(); }
+        catch (SQLException throwables) { throwables.printStackTrace(); }
         binding = StatsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -51,7 +57,8 @@ public class StatsActivity extends AppCompatActivity {
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[] {
-                new DataPoint(0, 1),
+//                new DataPoint(Integer.parseInt(sqLiteDatabase.getStats()), 5),
+                new DataPoint(Integer.parseInt(database.getStats()), 5),
                 new DataPoint(1, 5),
                 new DataPoint(2, 3),
                 new DataPoint(3, 2),
@@ -62,6 +69,30 @@ public class StatsActivity extends AppCompatActivity {
         setupNavigation();
 
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = new MenuInflater(this);
+        inflater.inflate(R.menu.help_menu, menu);
+        return true ;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.help_menu_item:
+                AlertDialog.Builder builder = new AlertDialog.Builder(StatsActivity.this);
+                builder.setMessage(
+                        "Name:      StatsActivity\n" +
+                                "Version:   3.0\n" +
+                                "Author:    Eric Tran\n\n" +
+                                "Description:\n" +
+                                "Stats!");
+                builder.setTitle("Activity Information");
+                builder.setNeutralButton("Done", null);
+                builder.show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

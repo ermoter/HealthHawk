@@ -160,17 +160,9 @@ public class AppDatabase
 
     public String getStats(){
 
-//        Cursor c = db.rawQuery(
-//                "SELECT * FROM "+ dbh.USERS_TABLE_NAME+
-//                        " WHERE "+ dbh.USERS_COLUMN_EMAIL+" = ?",new String[] {email});
-//
-//        if (c.moveToFirst())
-//        {
-//            return c.getString(c.getColumnIndex(dbh.USERS_COLUMN_NAME));
-//        }
-//        else {return "Unamed Person!";}
 
-        return "";
+
+        return "0";
     }
 
     /* ------------ Goals Table Methods ------------ */
