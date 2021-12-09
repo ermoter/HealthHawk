@@ -34,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity
     EditText emailEditText;
     EditText passwordEditText;
     EditText rePasswordEditText;
-    Toolbar toolbar;
+
     AppDatabase database;
     SharedPreferences prefs;
     SharedPreferences.Editor spEditor;
@@ -49,6 +49,24 @@ public class RegisterActivity extends AppCompatActivity
         setListeners();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try { database.open(); } catch (SQLException throwables) { throwables.printStackTrace(); }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        database.close();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        database.close();
+    }
+
     /* ------------ Setup ------------ */
     protected void assignElements()
     {
@@ -58,8 +76,6 @@ public class RegisterActivity extends AppCompatActivity
         emailEditText       = (EditText) this.findViewById(R.id.editTextTextEmailAddress);
         passwordEditText    = (EditText) this.findViewById(R.id.editTextTextPassword);
         rePasswordEditText  = (EditText) this.findViewById(R.id.editTextTextRePassword);
-        toolbar             = (Toolbar) this.findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         // Create and open database
         database = new AppDatabase(this);
@@ -97,7 +113,8 @@ public class RegisterActivity extends AppCompatActivity
                         "Version:   3.0\n" +
                         "Author:    Sebastian Koller\n\n" +
                         "Description:\n" +
-                        "...");
+                        "Enter credentials into the EditTexts. Click register to add yourself to the AppDatabase." +
+                                "You will be denied if the email account already exists or you've inputted too short of a password");
                 builder.setTitle("Activity Information");
                 builder.setNeutralButton("Done", null);
                 builder.show();
