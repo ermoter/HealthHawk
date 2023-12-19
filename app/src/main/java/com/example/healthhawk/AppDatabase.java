@@ -180,9 +180,6 @@ public class AppDatabase
         return "0";
     }
 
-    /* ------------ Goals Table Methods ------------ */
-
-
     /* ------------ Dates Table Methods ------------ */
     public void ReadDatabase(View view, String selectedDate, EditText AddEvent, TextView UpcomingEvents, Button AddEventbtn){
         String query = "Select Event from EventCalendar where Date = " + selectedDate;

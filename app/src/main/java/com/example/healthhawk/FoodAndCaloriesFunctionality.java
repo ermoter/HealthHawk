@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,10 +19,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 
 
 public class FoodAndCaloriesFunctionality extends AppCompatActivity {
@@ -63,31 +64,58 @@ public class FoodAndCaloriesFunctionality extends AppCompatActivity {
             public void onClick(View v) {
                 String text1 = inputFood.getText().toString();
                 String text2 = inputCalories.getText().toString();
-                String[] dbInput = {text1, text2};
-                foodList.add(text1);
-                calorieList.add(text2);
-                database.insertFood(dbInput);
-                // database.getAllFood(foodList, calorieList);
+                if (TextUtils.isEmpty(text1) || text1 == null) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Food Name cannot be empty", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (TextUtils.isEmpty(text2) || text2 == null) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Calories cannot be empty", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (TextUtils.isEmpty(text1) && TextUtils.isEmpty(text2)) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Food Name and Calories cannot be empty", Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    String[] dbInput = {text1, text2};
+                    foodList.add(text1);
+                    calorieList.add(text2);
+                    database.insertFood(dbInput);
+                    // database.getAllFood(foodList, calorieList);
 
-                foodAdapter.notifyDataSetChanged();
-                //calorieAdapter.notifyDataSetChanged();
+                    foodAdapter.notifyDataSetChanged();
+                    //calorieAdapter.notifyDataSetChanged();
 
-                inputFood.setText("");
-                inputCalories.setText("");
+                    inputFood.setText("");
+                    inputCalories.setText("");
+                }
             }
         });
 
         buttonDelItems.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                foodList.remove(inputFood.getText().toString());
-                calorieList.remove(inputCalories.getText().toString());
+                String text1 = inputFood.getText().toString();
+                String text2 = inputCalories.getText().toString();
 
-                database.deleteFood(inputFood.getText().toString());
+                if (TextUtils.isEmpty(text1) || text1 == null) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Food Name cannot be empty", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (TextUtils.isEmpty(text2) || text2 == null) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Calories cannot be empty", Toast.LENGTH_LONG);
+                    toast.show();
+                } else if (TextUtils.isEmpty(text1) && TextUtils.isEmpty(text2)) {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Food Name and Calories cannot be empty", Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    foodList.remove(text1);
+                    calorieList.remove(text2);
 
-                foodAdapter.remove(inputFood.getText().toString());
-                foodAdapter.remove(inputCalories.getText().toString());
-                foodAdapter.notifyDataSetChanged();
+                    database.deleteFood(text1);
 
+                    foodAdapter.remove(text1);
+                    foodAdapter.remove(text2);
+                    foodAdapter.notifyDataSetChanged();
+
+                    inputFood.setText("");
+                    inputCalories.setText("");
+                }
             }
         });
 

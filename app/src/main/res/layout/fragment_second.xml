@@ -13,7 +13,8 @@
         app:layout_constraintBottom_toTopOf="@id/button_second"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Congratulations on taking steps to better you and your health! May you have great tidings in your future." />
 
     <Button
         android:id="@+id/button_second"
